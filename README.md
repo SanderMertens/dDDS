@@ -80,7 +80,7 @@ dDDS_MemberCreateChild(Point_o, "points", PointSeq_o);
 dDDS_StructDefine(Polygon_o);
 ```
 Representing the IDL type
-```
+```idl
 struct Polygon {
   sequence<Point> points;
 };
