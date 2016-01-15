@@ -29,3 +29,36 @@ class Member : lang/member, hidden ::
 // Collections
 class Array : lang/array
 class Sequence : lang/sequence
+
+// Generic reference for samples
+type Object: lang/typeKind/VOID, true ::
+    dDDS/Object new(dDDS/Struct type, string json)
+    void set(dDDS/Object sample, string json)
+
+// Wrappers to hide Corto functions
+void @delete()
+
+// DomainParticipant
+class DomainParticipant::
+    id: int32
+    int16 construct()
+    void destruct()
+
+// Dynamic Topic
+class Topic::
+    type: dDDS/Struct
+    int16 construct()
+    void destruct()
+
+// Dynamic Publisher
+class Publisher::
+    partitions: dDDS/Sequence{dDDS/String}
+    int16 construct()
+    void destruct()
+
+// Dynamic Writer
+class DataWriter::
+    member topic: dDDS/Topic
+    int16 construct()
+    void destruct()
+    void write(object sample)

@@ -1,4 +1,4 @@
 
-COMPONENTS = [] << "SimpleType" << "ComplexType"
+COMPONENTS = [] << "SimpleType" << "ComplexType" << "Writer"
 
 require "#{ENV['CORTO_BUILD']}/forward"
