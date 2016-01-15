@@ -10,12 +10,12 @@ As you will notice, the source files are nearly empty. This is because the entir
 
 Install Corto
 ```
-curl https://corto.io/install | sh
+$ curl https://corto.io/install | sh
 ```
 
 Build the package
 ```
-corto build dDDS
+$ corto build dDDS
 ```
 
 ## Run examples
