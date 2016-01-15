@@ -92,11 +92,5 @@ All of the above has been realized with just 23 lines of code (see `dDDS.cx`).
 The prototype doesn't yet map the full IDL typesystem. What's missing is:
  * Unions
  * Typedefs
- * Enumerations
- * Arrays
- * Octet
- * Char
- * Float
- * Double
 
-Adding support for these types is straightforward as most of the types are already natively supported in Corto.
+These types are not natively supported in Corto, thus a mapping would have to be created. 
