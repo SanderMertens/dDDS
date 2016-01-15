@@ -94,5 +94,9 @@ The prototype doesn't yet map the full IDL typesystem. What's missing is:
  * Typedefs
  * Enumerations
  * Arrays
+ * Octet
+ * Char
+ * Float
+ * Double
 
-Adding support for these types is relatively straightforward.
+Adding support for these types is straightforward as most of the types are already natively supported in Corto.
