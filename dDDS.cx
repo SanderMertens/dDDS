@@ -4,11 +4,18 @@
 class Module : core/package, hidden
 
 // Primitive types
+binary Octet: Width_8
+character Char{}
 uint UShort: Width_16
 uint ULong: Width_32
 int Short: Width_16
 int Long: Width_32
+float Float: Width_32
+float Double: Width_64
 text String{}
+
+// Enum type
+class Enum : lang/enum
 
 // Struct type
 class Struct : lang/struct, hidden ::
@@ -20,4 +27,5 @@ class Member : lang/member, hidden ::
     void setKey(int32 id)
 
 // Collections
-class Sequence : lang/collection
+class Array : lang/array
+class Sequence : lang/sequence
