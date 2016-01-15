@@ -8,6 +8,11 @@ As you will notice, the source files are nearly empty. This is because the entir
 
 ## Building dDDS
 
+Clone repository (if not using the GitHub desktop client)
+```
+$ git clone https://github.com/SanderMertens/dDDS.git
+```
+
 Install Corto
 ```
 $ curl https://corto.io/install | sh
