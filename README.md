@@ -57,7 +57,15 @@ dDDS_MemberCreateChild(Point_o, "x", dDDS_Long_o);
 dDDS_MemberCreateChild(Point_o, "y", dDDS_Long_o);
 dDDS_StructDefine(Point_o);
 ```
-This code is a good example of what kind of code is generated:
+This code represents the IDL type
+```idl
+struct Point {
+  long x;
+  long y;
+};
+```
+
+The code is a good example of what kind of code is generated:
  * Type definitions (`dDDS_Module`, `dDDS_Struct`)
  * Type objects (`dDDS_Long_o`)
  * Creation functions (`*CreateChild`)
@@ -70,6 +78,12 @@ dDDS_Struct Polygon_o = dDDS_StructDeclareChild(Foo_o, "Polygon");
 dDDS_Sequence PointSeq_o = dDDS_SequenceCreate(Point_o, 0); // Anonymous sequence type
 dDDS_MemberCreateChild(Point_o, "points", PointSeq_o);
 dDDS_StructDefine(Polygon_o);
+```
+Representing the IDL type
+```
+struct Polygon {
+  sequence<Point> points;
+};
 ```
 Code generation guarantees consistency throughout and makes it incredibly simple to add new capabilities to the API. 
 All of the above has been realized with just 23 lines of code (see `dDDS.cx`).
