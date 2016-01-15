@@ -58,10 +58,10 @@ dDDS_MemberCreateChild(Point_o, "y", dDDS_Long_o);
 dDDS_StructDefine(Point_o);
 ```
 This code is a good example of what kind of code is generated:
- * Type definitions (dDDS_Module, dDDS_Struct)
- * Type objects (dDDS_Long_o)
- * Creation functions (*CreateChild)
- * Forward declaration functions (*DeclareChild, Define)
+ * Type definitions (`dDDS_Module`, `dDDS_Struct`)
+ * Type objects (`dDDS_Long_o`)
+ * Creation functions (`*CreateChild`)
+ * Forward declaration functions (`*DeclareChild`, `Define`)
 
 The types in this example are all named. Alternatively, you can also create anonymous types:
 ```c
