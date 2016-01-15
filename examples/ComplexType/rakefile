@@ -1,0 +1,4 @@
+
+TARGET = 'ComplexType'
+
+require "#{ENV['CORTO_BUILD']}/application"

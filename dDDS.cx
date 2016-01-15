@@ -1,0 +1,23 @@
+#package ::dDDS
+
+// Module
+class Module : core/package, hidden
+
+// Primitive types
+uint UShort: Width_16
+uint ULong: Width_32
+int Short: Width_16
+int Long: Width_32
+text String{}
+
+// Struct type
+class Struct : lang/struct, hidden ::
+    string metaXml()
+
+class Member : lang/member, hidden ::
+    alias type: lang/member/type
+    key: int32, hidden
+    void setKey(int32 id)
+
+// Collections
+class Sequence : lang/collection

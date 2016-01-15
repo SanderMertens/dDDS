@@ -1,0 +1,8 @@
+
+PACKAGE = 'dDDS'
+
+require "#{ENV['CORTO_BUILD']}/package"
+
+COMPONENTS << "examples"
+
+require "#{ENV['CORTO_BUILD']}/forward"
