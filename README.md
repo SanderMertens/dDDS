@@ -4,6 +4,8 @@
 This project is a prototype for a dynamic DDS API which allows for the creation of types at runtime. The API provides
 OpenSpliceDDS compatible metadescriptors based on dynamically created types.
 
+As you will notice, the source files are nearly empty. This is because the entire API is generated (see Architecture).
+
 ## Building dDDS
 
 Install Corto
