@@ -93,7 +93,7 @@ struct Polygon {
 };
 ```
 Code generation guarantees consistency throughout and makes it incredibly simple to add new capabilities to the API. 
-All of the above has been realized with just 23 lines of code (see `dDDS.cx`).
+All of the above has been realized with just 31 lines of code (see `dDDS.cx`).
 
 ## Limitations
 The prototype doesn't yet map the full IDL typesystem. What's missing is:
