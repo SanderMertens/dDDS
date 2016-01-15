@@ -105,5 +105,15 @@ All of the above has been realized with just 31 lines of code (see `dDDS.cx`).
 The prototype doesn't yet map the full IDL typesystem. What's missing is:
  * Unions
  * Typedefs
-
 These types are not natively supported in Corto, thus a mapping would have to be created. 
+
+Due to limitations in the metadescriptor format, the following type can be created in the API but not in XML:
+```
+struct Foo
+struct Bar {
+    sequence<Foo> member;
+};
+struct Foo {
+    long member;
+};
+```
