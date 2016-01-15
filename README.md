@@ -21,7 +21,7 @@ corto build dDDS
 ## Run examples
 ### SimpleType
 ```
-corto run dDDS/examples/SimpleType
+$ corto run dDDS/examples/SimpleType
 # IDL:
 struct Point {
   long x;
@@ -34,7 +34,7 @@ struct Point {
 
 ### ComplexType
 ```
-corto run dDDS/examples/ComplexType
+$ corto run dDDS/examples/ComplexType
 # IDL:
 struct Polygon {
   long id;
