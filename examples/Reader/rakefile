@@ -1,0 +1,4 @@
+
+TARGET = 'Reader'
+
+require "#{ENV['CORTO_BUILD']}/application"

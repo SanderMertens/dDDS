@@ -80,7 +80,7 @@ corto_void _dDDS_DataWriter_destruct(dDDS_DataWriter this) {
 /* $end */
 }
 
-corto_void _dDDS_DataWriter_write(dDDS_DataWriter this, corto_object sample) {
+corto_int16 _dDDS_DataWriter_write(dDDS_DataWriter this, corto_object sample) {
 /* $begin(dDDS/DataWriter/write) */
     DDS_DataWriter writer = dDDS_getEntity(this, dDDS_DataWriter_o);
     if (writer) {

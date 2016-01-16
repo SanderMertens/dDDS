@@ -17,6 +17,9 @@ extern "C" {
 #endif
 
 
+DDDS_EXPORT dDDS_String _dDDS_Object_json(dDDS_Object sample);
+#define dDDS_Object_json(sample) _dDDS_Object_json(sample)
+
 DDDS_EXPORT dDDS_Object _dDDS_Object_new(dDDS_Struct type, corto_string json);
 #define dDDS_Object_new(type, json) _dDDS_Object_new(dDDS_Struct(type), json)
 

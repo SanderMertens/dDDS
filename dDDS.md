@@ -5,6 +5,15 @@
 
 ## Char
 
+## DataReader
+### construct()
+#### Returns
+### destruct()
+### read(/dDDS/ObjectSeq& sampleSeq)
+#### sampleSeq
+#### Returns
+### topic
+
 ## DataWriter
 ### construct()
 #### Returns
@@ -12,6 +21,7 @@
 ### topic
 ### write(object sample)
 #### sample
+#### Returns
 
 ## DomainParticipant
 ### construct()
@@ -36,6 +46,9 @@
 ## Module
 
 ## Object
+### json(/dDDS/Object sample)
+#### sample
+#### Returns
 ### new(/dDDS/Struct type,string json)
 #### type
 #### json
@@ -43,6 +56,8 @@
 ### set(/dDDS/Object sample,string json)
 #### sample
 #### json
+
+## ObjectSeq
 
 ## Octet
 
@@ -61,6 +76,12 @@
 ## Struct
 ### metaXml()
 #### Returns
+
+## Subscriber
+### construct()
+#### Returns
+### destruct()
+### partitions
 
 ## Topic
 ### construct()

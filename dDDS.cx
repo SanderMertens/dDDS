@@ -34,6 +34,7 @@ class Sequence : lang/sequence
 type Object: lang/typeKind/VOID, true ::
     dDDS/Object new(dDDS/Struct type, string json)
     void set(dDDS/Object sample, string json)
+    dDDS/String json(dDDS/Object sample)
 
 // Wrappers to hide Corto functions
 void @delete()
@@ -56,9 +57,24 @@ class Publisher::
     int16 construct()
     void destruct()
 
+// Dynamic Subscriber
+class Subscriber::
+    partitions: dDDS/Sequence{dDDS/String}
+    int16 construct()
+    void destruct()
+
 // Dynamic Writer
 class DataWriter::
     member topic: dDDS/Topic
     int16 construct()
     void destruct()
-    void write(object sample)
+    int16 write(object sample)
+
+dDDS/Sequence ObjectSeq: dDDS/Object
+
+// Dynamic Reader
+class DataReader::
+    member topic: dDDS/Topic
+    int16 construct()
+    void destruct()
+    int16 read(dDDS/ObjectSeq& sampleSeq)

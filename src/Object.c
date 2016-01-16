@@ -12,6 +12,14 @@
 #include "json.h"
 /* $end */
 
+dDDS_String _dDDS_Object_json(dDDS_Object sample) {
+/* $begin(dDDS/Object/json) */
+
+    return json_fromCorto(sample);
+
+/* $end */
+}
+
 dDDS_Object _dDDS_Object_new(dDDS_Struct type, corto_string json) {
 /* $begin(dDDS/Object/new) */
 
