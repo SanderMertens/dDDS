@@ -47,14 +47,25 @@ $ corto run dDDS/examples/ComplexType
 Output:
 ```
 # IDL:
+enum Color {
+  Red,
+  Orange,
+  Yellow,
+  Green,
+  Blue,
+  Purple,
+};
+
 struct Polygon {
   long id;
   string name;
+  Color color;
   sequence<Point> points;
 };
 
 # XML:
-<MetaData version="1.0.0"><Module name="Foo"><Struct name="Point"><Member name="x"><Long/></Member><Member name="y"><Long/></Member></Struct><Struct name="Polygon"><Member name="id"><Long/></Member><Member name="name"><String/></Member><Member name="points"><Array><Type name="Point"/></Array></Member></Struct></Module></MetaData>
+<MetaData version="1.0.0"><Module name="Foo"><Enum name="Color"><Element name="Red" value="0"/><Element name="Orange" value="1"/><Element name="Yellow" value="2"/><Element name="Green" value="3"/><Element name="Blue" value="4"/><Element name="Purple" value="5"/></Enum><Struct name="Point"><Member name="x"><Long/></Member><Member name="y"><Long/></Member></Struct><Struct name="Polygon"><Member name="id"><Long/></Member><Member name="name"><String/></Member><Member name="color"><Enum name="Color"><Element name="Red" value="0"/><Element name="Orange" value="1"/><Element name="Yellow" value="2"/><Element name="Green" value="3"/><Element name="Blue" value="4"/><Element name="Purple" value="5"/></Enum></Member><Member name="points"><Sequence><Type name="Point"/></Sequence></Member></Struct></Module></MetaData>
+
 ```
 
 ## Architecture
