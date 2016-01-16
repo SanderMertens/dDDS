@@ -9,6 +9,17 @@
 #include "corto/corto.h"
 #include "_interface.h"
 
-$header() */
+#include "dDDS/dDDS.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* $header() */
 /* You can put your own definitions here! */
-/* $end
+/* $end */
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+

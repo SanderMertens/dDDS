@@ -28,24 +28,23 @@ int ReaderMain(int argc, char *argv[]) {
     if (!sampleSeq) goto error;
 
     while (1) {
-        /* Read sample from DDS */
         if (dDDS_DataReader_take(reader, sampleSeq)) {
-            corto_error("read failed: %s", corto_lasterr());
+            corto_error("[reader] read failed: %s", corto_lasterr());
         }
 
         dDDS_ObjectSeqForeach(*sampleSeq, s) {
             dDDS_String json = dDDS_Object_json(s);
-            printf("Sample received: %s\n", json);
+            printf("[reader] sample received: %s\n", json);
             corto_dealloc(json);
         }
 
-        if (!sampleSeq->length) printf("No data received.\n");
+        if (!sampleSeq->length) printf("[reader] no data received.\n");
 
         corto_sleep(1, 0);
     }
 
     return 0;
 error:
-    corto_error("Reader failed: %s", corto_lasterr());
+    corto_error("[reader] failed: %s", corto_lasterr());
     return -1;
 }
