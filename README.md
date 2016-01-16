@@ -4,7 +4,7 @@
 This project is a prototype for a dynamic DDS API which allows for the creation of types at runtime. The API provides
 OpenSpliceDDS compatible metadescriptors based on dynamically created types.
 
-As you will notice, the source files are nearly empty. This is because the entire API is generated (see Architecture).
+The API allows for creating dynamic readers and writers, and send/receive samples over DDS. The API uses JSON to get and set values. Not all DDS features are supported yet. See 'Limitations' for what is not yet possible.
 
 ## Building dDDS
 
@@ -102,11 +102,22 @@ Code generation guarantees consistency throughout and makes it incredibly simple
 All of the above has been realized with just 31 lines of code (see `dDDS.cx`).
 
 ## Limitations
+### Missing IDL types
 The prototype doesn't yet map the full IDL typesystem. What's missing is:
  * Unions
  * Typedefs
 These types are not natively supported in Corto, thus a mapping would have to be created. 
 
+### Unsupported types when reading / writing
+The current API assumes that the layout of the samples is equal in DDS and Corto. This is true for 80% of the cases, however, sequences are different. Therefore when a user would attempt to read/write a type containing a sequence, the API will most likely crash.
+
+### QoS settings
+The API uses default QoS settings at the moment. A user cannot yet specify his own settings.
+
+### Import types from running DDS system
+At this point, the API cannot yet import types from a running DDS system.
+
+### Metadescriptor limitations
 Due to limitations in the metadescriptor format, the following type can be created in the API but not in XML:
 ```
 struct Foo
