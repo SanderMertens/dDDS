@@ -49,7 +49,7 @@ int ComplexTypeMain(int argc, char *argv[]) {
       "};\n\n"\
       "# XML:\n");
 
-    xml = dDDS_Struct_metaXml(Polygon_o);
+    xml = dDDS_metaXml(Polygon_o);
     printf("%s\n", xml);
     dDDS_free(xml);
 

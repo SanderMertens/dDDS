@@ -18,6 +18,7 @@ extern "C" {
 
 
 /* $header() */
+#include "dDDS/MetaXml.h"
 
 /* Free heap object. Use dDDS_delete for dDDS_Object and entities.  */
 DDDS_EXPORT void dDDS_free(void* ptr);
@@ -35,6 +36,9 @@ DDDS_EXPORT const char* dDDS_lasterr(void);
 
 DDDS_EXPORT corto_void _dDDS_delete(dDDS_Object object);
 #define dDDS_delete(object) _dDDS_delete(object)
+
+DDDS_EXPORT corto_string _dDDS_metaXml(corto_struct type);
+#define dDDS_metaXml(type) _dDDS_metaXml(corto_struct(type))
 #include "dDDS/Array.h"
 #include "dDDS/Constant.h"
 #include "dDDS/DataReader.h"

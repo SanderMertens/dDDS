@@ -36,7 +36,7 @@ corto_int16 _dDDS_Topic_construct(dDDS_Topic this) {
     }
 
     /* Get metadescriptor */
-    xml = dDDS_Struct_metaXml(this->type);
+    xml = dDDS_metaXml(this->type);
 
     /* Create typename */
     corto_path(typeName, root_o, this->type, "::");

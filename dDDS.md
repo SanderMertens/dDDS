@@ -1,6 +1,9 @@
 # /dDDS
 ### delete(/dDDS/Object object)
 #### object
+### metaXml(struct type)
+#### type
+#### Returns
 
 ## Array
 
@@ -84,8 +87,6 @@
 ## String
 
 ## Struct
-### metaXml()
-#### Returns
 
 ## Subscriber
 ### construct()

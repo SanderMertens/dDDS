@@ -11,7 +11,7 @@ int SimpleTypeMain(int argc, char *argv[]) {
     dDDS_StructDefine(Point_o);
 
     /* Print Xml for simple struct */
-    xml = dDDS_Struct_metaXml(Point_o);
+    xml = dDDS_metaXml(Point_o);
     printf("# IDL:\nstruct Point {\n  long x;\n  long y;\n};\n\n# XML:\n");
     printf("%s\n", xml);
     dDDS_free(xml);

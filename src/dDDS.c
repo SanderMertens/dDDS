@@ -9,6 +9,8 @@
 #include "dDDS/dDDS.h"
 
 /* $header() */
+#include "dDDS_intern.h"
+
 corto_int16 DDDS_ENTITY_HANDLE;
 
 void* _dDDS_getEntity(corto_object o, corto_type type) {
@@ -57,7 +59,15 @@ void dDDS_seterr(const char* fmt, ...) {
 corto_void _dDDS_delete(dDDS_Object object) {
 /* $begin(dDDS/delete) */
 
-    /* << Insert implementation >> */
+    corto_delete(object);
+
+/* $end */
+}
+
+corto_string _dDDS_metaXml(corto_struct type) {
+/* $begin(dDDS/metaXml) */
+
+    return dDDS_metaXmlGet(corto_type(type));
 
 /* $end */
 }

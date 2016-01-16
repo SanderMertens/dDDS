@@ -24,8 +24,7 @@ int Constant: Width_32::
     int16 init() method
 
 // Struct type
-class Struct : lang/struct, hidden ::
-    string metaXml()
+class Struct : lang/struct, hidden
 
 class Member : lang/member, hidden ::
     alias type: lang/member/type
@@ -45,6 +44,10 @@ type Object: lang/typeKind/VOID, true ::
 // Wrappers to hide Corto functions
 void @delete(dDDS/Object object)
 
+// Convert type to a metadescriptor. Use lang/struct so that any Corto type can be
+// used. This is useful when for example importing types from IDL.
+string metaXml(lang/struct type)
+
 // DomainParticipant
 class DomainParticipant::
     id: int32
@@ -53,7 +56,7 @@ class DomainParticipant::
 
 // Dynamic Topic
 class Topic::
-    type: dDDS/Struct
+    type: lang/struct // Use lang/struct, so any corto struct can be used
     int16 construct()
     void destruct()
 
