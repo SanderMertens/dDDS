@@ -6,6 +6,10 @@
 
 ## Char
 
+## Constant
+### init()
+#### Returns
+
 ## DataReader
 ### construct()
 #### Returns

@@ -36,6 +36,7 @@ DDDS_EXPORT const char* dDDS_lasterr(void);
 DDDS_EXPORT corto_void _dDDS_delete(dDDS_Object object);
 #define dDDS_delete(object) _dDDS_delete(object)
 #include "dDDS/Array.h"
+#include "dDDS/Constant.h"
 #include "dDDS/DataReader.h"
 #include "dDDS/DataWriter.h"
 #include "dDDS/DomainParticipant.h"

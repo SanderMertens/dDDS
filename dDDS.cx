@@ -19,6 +19,10 @@ text String{}
 // Enum type
 class Enum : lang/enum
 
+// Enumeration constants
+int Constant: Width_32::
+    int16 init() method
+
 // Struct type
 class Struct : lang/struct, hidden ::
     string metaXml()
