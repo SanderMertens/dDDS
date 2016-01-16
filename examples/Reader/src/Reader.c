@@ -28,8 +28,8 @@ int ReaderMain(int argc, char *argv[]) {
     if (!sampleSeq) goto error;
 
     while (1) {
-        /* Write sample to DDS */
-        if (dDDS_DataReader_read(reader, sampleSeq)) {
+        /* Read sample from DDS */
+        if (dDDS_DataReader_take(reader, sampleSeq)) {
             corto_error("read failed: %s", corto_lasterr());
         }
 
@@ -38,6 +38,8 @@ int ReaderMain(int argc, char *argv[]) {
             printf("Sample received: %s\n", json);
             corto_dealloc(json);
         }
+
+        if (!sampleSeq->length) printf("No data received.\n");
 
         corto_sleep(1, 0);
     }

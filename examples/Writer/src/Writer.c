@@ -35,8 +35,12 @@ int WriterMain(int argc, char *argv[]) {
         sprintf(json, "{\"x\":%d,\"y\":%d}", x += 1, y += 2);
         dDDS_Object_set(sample, json);
 
+        printf("Write sample '%s'\n", json);
+
         /* Write sample to DDS */
-        dDDS_DataWriter_write(writer, sample);
+        if (dDDS_DataWriter_write(writer, sample)) {
+            corto_error("Writer: %s", corto_lasterr);
+        }
         corto_sleep(1, 0);
     }
 

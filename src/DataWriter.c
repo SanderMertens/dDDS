@@ -83,13 +83,18 @@ corto_void _dDDS_DataWriter_destruct(dDDS_DataWriter this) {
 corto_int16 _dDDS_DataWriter_write(dDDS_DataWriter this, corto_object sample) {
 /* $begin(dDDS/DataWriter/write) */
     DDS_DataWriter writer = dDDS_getEntity(this, dDDS_DataWriter_o);
+
     if (writer) {
         DDS_ReturnCode_t status;
         status = DDS_DataWriter_write(writer, sample, DDS_HANDLE_NIL);
         if (status != DDS_RETCODE_OK) {
-            corto_error("dDDS/DataWriter/write: write failed");
+            corto_seterr("dDDS/DataWriter/write: write failed");
+            goto error;
         }
     }
 
+    return 0;
+error:
+    return -1;
 /* $end */
 }

@@ -12,6 +12,9 @@
 ### read(/dDDS/ObjectSeq& sampleSeq)
 #### sampleSeq
 #### Returns
+### take(/dDDS/ObjectSeq& sampleSeq)
+#### sampleSeq
+#### Returns
 ### topic
 
 ## DataWriter
