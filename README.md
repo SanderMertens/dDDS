@@ -62,7 +62,7 @@ The API, except for the XML serializer, is based  exclusively on code generation
 the Corto typesystem in dDDS types. This effectively hides the Corto typesystem, and makes the API consistent with how types are 
 defined in IDL.
 
-This is what the API looks like:
+This is what the type definition API looks like:
 ```c
 dDDS_Module Foo_o = dDDS_ModuleCreateChild(root_o, "Foo");
 dDDS_Struct Point_o = dDDS_StructDeclareChild(Foo_o, "Point");
