@@ -106,6 +106,7 @@ All of the above has been realized with just 31 lines of code (see `dDDS.cx`).
 The prototype doesn't yet map the full IDL typesystem. What's missing is:
  * Unions
  * Typedefs
+ * 
 These types are not natively supported in Corto, thus a mapping would have to be created. 
 
 ### Unsupported types when reading / writing
