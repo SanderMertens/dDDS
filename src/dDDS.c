@@ -28,9 +28,33 @@ void* _dDDS_getEntity(corto_object o, corto_type type) {
 
     return result;
 }
+
+void dDDS_free(void* ptr) {
+    corto_dealloc(ptr);
+}
+
+void dDDS_error(const char* fmt, ...) {
+    va_list list;
+
+    va_start(list, fmt);
+    corto_errorv((char*)fmt, list);
+    va_end(list);
+}
+
+const char* dDDS_lasterr() {
+    return (const char*)corto_lasterr();
+}
+
+void dDDS_seterr(const char* fmt, ...) {
+    va_list list;
+
+    va_start(list, fmt);
+    corto_seterrv((char*)fmt, list);
+    va_end(list);
+}
 /* $end */
 
-corto_void _dDDS_delete(void) {
+corto_void _dDDS_delete(dDDS_Object object) {
 /* $begin(dDDS/delete) */
 
     /* << Insert implementation >> */

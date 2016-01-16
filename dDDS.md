@@ -1,5 +1,6 @@
 # /dDDS
-### delete()
+### delete(/dDDS/Object object)
+#### object
 
 ## Array
 
@@ -39,6 +40,8 @@
 ## Float
 
 ## Long
+
+## LongLong
 
 ## Member
 ### key
@@ -93,5 +96,7 @@
 ### type
 
 ## ULong
+
+## ULongLong
 
 ## UShort

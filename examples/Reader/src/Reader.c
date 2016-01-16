@@ -18,10 +18,10 @@ int ReaderMain(int argc, char *argv[]) {
     if (!topic) goto error;
 
     dDDS_StringSeq partitions = {0, NULL};
-    dDDS_Subscriber pub = dDDS_SubscriberCreateChild(dp, "pub", partitions);
-    if (!pub) goto error;
+    dDDS_Subscriber sub = dDDS_SubscriberCreateChild(dp, "pub", partitions);
+    if (!sub) goto error;
 
-    dDDS_DataReader reader = dDDS_DataReaderCreateChild(pub, "reader", topic);
+    dDDS_DataReader reader = dDDS_DataReaderCreateChild(sub, "reader", topic);
     if (!reader) goto error;
 
     dDDS_ObjectSeq *sampleSeq = dDDS_ObjectSeqCreate();
@@ -29,13 +29,13 @@ int ReaderMain(int argc, char *argv[]) {
 
     while (1) {
         if (dDDS_DataReader_take(reader, sampleSeq)) {
-            corto_error("[reader] read failed: %s", corto_lasterr());
+            dDDS_error("[reader] read failed: %s", dDDS_lasterr());
         }
 
         dDDS_ObjectSeqForeach(*sampleSeq, s) {
             dDDS_String json = dDDS_Object_json(s);
             printf("[reader] sample received: %s\n", json);
-            corto_dealloc(json);
+            dDDS_free(json);
         }
 
         if (!sampleSeq->length) printf("[reader] no data received.\n");
@@ -45,6 +45,6 @@ int ReaderMain(int argc, char *argv[]) {
 
     return 0;
 error:
-    corto_error("[reader] failed: %s", corto_lasterr());
+    dDDS_error("[reader] failed: %s", dDDS_lasterr());
     return -1;
 }

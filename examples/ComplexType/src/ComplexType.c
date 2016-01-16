@@ -23,7 +23,7 @@ int ComplexTypeMain(int argc, char *argv[]) {
     printf("# IDL:\nstruct Polygon {\n  long id;\n  string name;\n  sequence<Point> points;\n};\n\n# XML:\n");
     xml = dDDS_Struct_metaXml(Polygon_o);
     printf("%s\n", xml);
-    corto_dealloc(xml);
+    dDDS_free(xml);
 
     return 0;
 }

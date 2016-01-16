@@ -8,8 +8,10 @@ binary Octet: Width_8
 character Char{}
 uint UShort: Width_16
 uint ULong: Width_32
+uint ULongLong: Width_64
 int Short: Width_16
 int Long: Width_32
+int LongLong: Width_64
 float Float: Width_32
 float Double: Width_64
 text String{}
@@ -37,7 +39,7 @@ type Object: lang/typeKind/VOID, true ::
     dDDS/String json(dDDS/Object sample)
 
 // Wrappers to hide Corto functions
-void @delete()
+void @delete(dDDS/Object object)
 
 // DomainParticipant
 class DomainParticipant::

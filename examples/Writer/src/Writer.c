@@ -39,13 +39,13 @@ int WriterMain(int argc, char *argv[]) {
 
         /* Write sample to DDS */
         if (dDDS_DataWriter_write(writer, sample)) {
-            corto_error("[writer] %s", corto_lasterr);
+            dDDS_error("[writer] %s", dDDS_lasterr());
         }
         corto_sleep(1, 0);
     }
 
     return 0;
 error:
-    corto_error("[writer] failed: %s", corto_lasterr());
+    dDDS_error("[writer] failed: %s", dDDS_lasterr());
     return -1;
 }

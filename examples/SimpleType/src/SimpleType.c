@@ -14,7 +14,7 @@ int SimpleTypeMain(int argc, char *argv[]) {
     xml = dDDS_Struct_metaXml(Point_o);
     printf("# IDL:\nstruct Point {\n  long x;\n  long y;\n};\n\n# XML:\n");
     printf("%s\n", xml);
-    corto_dealloc(xml);
+    dDDS_free(xml);
 
     return 0;
 }
