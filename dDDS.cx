@@ -1,5 +1,21 @@
 #package ::dDDS
 
+// API result
+enum ReturnCode::
+    Ok: 0
+    Error: 1
+    Unsupported: 2
+    BadParameter: 3
+    PreconditionNotMet: 4
+    OutOfResources: 5
+    NotEnabled: 6
+    ImmutablePolicy: 7
+    InconsistentPolicy: 8
+    AlreadyDeleted: 9
+    Timeout: 10
+    NoData: 11
+    IllegalOperation: 12
+
 // Module
 class Module : core/package, hidden
 
@@ -28,12 +44,14 @@ class Struct : lang/struct, hidden
 
 class Member : lang/member, hidden ::
     alias type: lang/member/type
-    key: int32, hidden
-    void setKey(int32 id)
 
 // Collections
 class Array : lang/array
 class Sequence : lang/sequence
+
+// Typedef placeholder
+struct Typedef::
+    type : object
 
 // Generic reference for samples
 type Object: lang/typeKind/VOID, true ::
@@ -44,19 +62,31 @@ type Object: lang/typeKind/VOID, true ::
 // Wrappers to hide Corto functions
 void @delete(dDDS/Object object)
 
-// Convert type to a metadescriptor. Use lang/struct so that any Corto type can be
-// used. This is useful when for example importing types from IDL.
-string metaXml(lang/struct type)
+// Convert type to a metadescriptor. Use lang/struct so that any Corto type can
+// be used. This is useful when for example importing types from IDL.
+string toMetaXml(lang/struct type)
+
+// Inject type from metadescriptor
+ReturnCode fromMetaXml(dDDS/String xml)
+
+// Forward declare entities
+class Subscriber
+class Publisher
 
 // DomainParticipant
 class DomainParticipant::
     id: int32
+    watchForTopics: list{string}, private | local
+    void requireTopic(string topic)
+    dDDS/Subscriber defaultSubscriber()
+    dDDS/Publisher defaultPublisher()
     int16 construct()
     void destruct()
 
 // Dynamic Topic
 class Topic::
     type: lang/struct // Use lang/struct, so any corto struct can be used
+    key: string
     int16 construct()
     void destruct()
 
@@ -75,16 +105,72 @@ class Subscriber::
 // Dynamic Writer
 class DataWriter::
     member topic: dDDS/Topic
+    member publisher: dDDS/Publisher, private
     int16 construct()
     void destruct()
-    int16 write(object sample)
+    ReturnCode write(dDDS/Object sample)
 
 dDDS/Sequence ObjectSeq: dDDS/Object
+
+// SampleState, ViewState and InstanceState
+bitmask SampleState::
+    constant Any: 0x0
+    Read: 0x1
+    NotRead: 0x2
+
+bitmask ViewState::
+    constant Any: 0x0
+    New: 0x1
+    NotNew: 0x2
+
+bitmask InstanceState::
+    constant Any: 0x0
+    Alive: 0x1
+    NotAlive: 0x2
+    Disposed: 0x4
+    NoWriters: 0x8
 
 // Dynamic Reader
 class DataReader::
     member topic: dDDS/Topic
+    member subscriber: dDDS/Publisher, private
     int16 construct()
     void destruct()
-    int16 read(dDDS/ObjectSeq& sampleSeq)
-    int16 take(dDDS/ObjectSeq& sampleSeq)
+    ReturnCode readAny(dDDS/ObjectSeq& sampleSeq)
+    ReturnCode takeAny(dDDS/ObjectSeq& sampleSeq)
+
+    ReturnCode read(
+        dDDS/ObjectSeq& sampleSeq,
+        uint32 length,
+        SampleState sampleState,
+        ViewState viewState,
+        InstanceState instanceState)
+
+    ReturnCode take(
+        dDDS/ObjectSeq& sampleSeq,
+        uint32 length,
+        SampleState sampleState,
+        ViewState viewState,
+        InstanceState instanceState)
+
+// Generic Condition
+void ConditionAction(Object c) delegate
+class Condition::
+    onTrigger: ConditionAction
+
+// ReadCondition
+class ReadCondition : Condition::
+    int16 construct()
+    void destruct()
+    member sampleState: dDDS/SampleState
+    member viewState: dDDS/ViewState
+    member instanceState: dDDS/InstanceState
+
+// WaitSet
+class WaitSet::
+    conditions: list{Condition}, private|local
+    int16 construct()
+    void destruct()
+    ReturnCode attach(Condition cond)
+    ReturnCode detach(Condition cond)
+    ReturnCode dispatch(core/time timeout)

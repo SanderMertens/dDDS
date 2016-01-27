@@ -1,7 +1,7 @@
 #include "ComplexType.h"
 
 int ComplexTypeMain(int argc, char *argv[]) {
-    corto_string xml;
+    char* xml;
 
     /* Create simple Point struct */
     dDDS_Module Foo_o = dDDS_ModuleCreateChild(root_o, "Foo");
@@ -22,8 +22,7 @@ int ComplexTypeMain(int argc, char *argv[]) {
 
     /* Complex struct */
     dDDS_Struct Polygon_o = dDDS_StructDeclareChild(Foo_o, "Polygon");
-    dDDS_Member id_o = dDDS_MemberCreateChild(Polygon_o, "id", dDDS_Long_o);
-    dDDS_Member_setKey(id_o, 1); // First key member- number indicates ordering
+    dDDS_MemberCreateChild(Polygon_o, "id", dDDS_Long_o);
     dDDS_MemberCreateChild(Polygon_o, "name", dDDS_String_o);
     dDDS_MemberCreateChild(Polygon_o, "color", Color_o);
     dDDS_Sequence PointSeq_o = dDDS_SequenceCreate(Point_o, 0);
@@ -49,7 +48,7 @@ int ComplexTypeMain(int argc, char *argv[]) {
       "};\n\n"\
       "# XML:\n");
 
-    xml = dDDS_metaXml(Polygon_o);
+    xml = dDDS_toMetaXml(Polygon_o);
     printf("%s\n", xml);
     dDDS_free(xml);
 

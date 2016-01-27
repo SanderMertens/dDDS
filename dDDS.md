@@ -2,157 +2,195 @@
 Dynamic DDS API.
 
 ### delete(/dDDS/Object object)
-Delete a dDDS entity or `dDDS/Object`.
-
 #### object
-
-### metaXml(struct type)
-Generate an OpenSplice XML metadescriptor from a type.
-#### type
-The type for which to generate the descriptor.
+### fromMetaXml(/dDDS/String xml)
+#### xml
 #### Returns
-The XML metadescriptor. `NULL` if failed.
+### toMetaXml(struct type)
+#### type
+#### Returns
 
 ## Array
-IDL array
 
 ## Char
-IDL character
+
+## Condition
+### onTrigger
+
+## ConditionAction
 
 ## Constant
-Enumeration constant.
 ### init()
 #### Returns
 
 ## DataReader
-Dynamic DataReader.
-
 ### construct()
 #### Returns
 ### destruct()
-### read(/dDDS/ObjectSeq& sampleSeq)
+### read(/dDDS/ObjectSeq& sampleSeq,uint32 length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
+#### sampleSeq
+#### length
+#### sampleState
+#### viewState
+#### instanceState
+#### Returns
+### readAny(/dDDS/ObjectSeq& sampleSeq)
 #### sampleSeq
 #### Returns
-### take(/dDDS/ObjectSeq& sampleSeq)
+### subscriber
+### take(/dDDS/ObjectSeq& sampleSeq,uint32 length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
+#### sampleSeq
+#### length
+#### sampleState
+#### viewState
+#### instanceState
+#### Returns
+### takeAny(/dDDS/ObjectSeq& sampleSeq)
 #### sampleSeq
 #### Returns
 ### topic
 
 ## DataWriter
-Dynamic DataWriter.
-
 ### construct()
 #### Returns
 ### destruct()
+### publisher
 ### topic
-### write(object sample)
+### write(/dDDS/Object sample)
 #### sample
 #### Returns
 
 ## DomainParticipant
-Dynamic DomainParticipant.
 ### construct()
+#### Returns
+### defaultPublisher()
+#### Returns
+### defaultSubscriber()
 #### Returns
 ### destruct()
 ### id
+### requireTopic(string topic)
+#### topic
+### watchForTopics
 
 ## Double
-IDL Double
 
 ## Enum
-IDL Enumeration
 
 ## Float
-IDL Floating point
+
+## InstanceState
+### Alive
+### Any
+### Disposed
+### NotAlive
+### NoWriters
 
 ## Long
-IDL 32bit signed integer
 
 ## LongLong
-IDL 64bit signed integer
 
 ## Member
-Member of dynamic struct
-### key
-The key id determines the order in which keyfields appear.
-### setKey(int32 id)
-Set the key id.
-#### id
 ### type
-The type of the member.
 
 ## Module
-IDL Module.
 
 ## Object
-A dynamic object. Can be used to hold a reference to a dDDS entity or object of
-any type.
 ### json(/dDDS/Object sample)
-Retrieve value of object in JSON.
 #### sample
 #### Returns
-
 ### new(/dDDS/Struct type,string json)
-Create new dynamic object.
 #### type
-The type of the object.
 #### json
-The initial value of the object in JSON.
 #### Returns
-The object if success, NULL if fails.
-
 ### set(/dDDS/Object sample,string json)
-Set value of the object in JSON.
 #### sample
-The object.
 #### json
-The new value in JSON.
 
 ## ObjectSeq
-Sequence of dynamic objects.
 
 ## Octet
-IDL octet.
 
 ## Publisher
-Dynamic publisher.
 ### construct()
 #### Returns
 ### destruct()
 ### partitions
 
+## ReadCondition
+### construct()
+#### Returns
+### destruct()
+### instanceState
+### sampleState
+### viewState
+
+## ReturnCode
+### AlreadyDeleted
+### BadParameter
+### Error
+### IllegalOperation
+### ImmutablePolicy
+### InconsistentPolicy
+### NoData
+### NotEnabled
+### Ok
+### OutOfResources
+### PreconditionNotMet
+### Timeout
+### Unsupported
+
+## SampleState
+### Any
+### NotRead
+### Read
+
 ## Sequence
-IDL Sequence.
 
 ## Short
-IDL 16bit signed integer.
 
 ## String
-IDL string.
 
 ## Struct
-IDL struct.
 
 ## Subscriber
-Dynamic subscriber.
 ### construct()
 #### Returns
 ### destruct()
 ### partitions
 
 ## Topic
-Dynamic topic.
 ### construct()
 #### Returns
 ### destruct()
+### key
 ### type
-The topic type.
+
+## Typedef
+### type
 
 ## ULong
-IDL 32bit unsigned integer.
 
 ## ULongLong
-IDL 64bit unsigned integer.
 
 ## UShort
-IDL 16bit unsigned integer.
+
+## ViewState
+### Any
+### New
+### NotNew
+
+## WaitSet
+### attach(/dDDS/Condition cond)
+#### cond
+#### Returns
+### conditions
+### construct()
+#### Returns
+### destruct()
+### detach(/dDDS/Condition cond)
+#### cond
+#### Returns
+### dispatch(/corto/core/time timeout)
+#### timeout
+#### Returns

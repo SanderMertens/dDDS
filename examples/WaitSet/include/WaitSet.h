@@ -1,10 +1,10 @@
-/* Reader.h
+/* WaitSet.h
  *
  * This file is generated. Do not modify.
  */
 
-#ifndef READER_H
-#define READER_H
+#ifndef WAITSET_H
+#define WAITSET_H
 
 #include "corto/corto.h"
 

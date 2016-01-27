@@ -1,51 +1,36 @@
 #include "Writer.h"
 
 int WriterMain(int argc, char *argv[]) {
-    int x = 0, y = 0;
     char json[256];
+    int x = 0, y = 0;
 
-    /* Create Point type */
-    dDDS_Module Foo_o = dDDS_ModuleCreateChild(root_o, "Foo");
-    dDDS_Struct Point_o = dDDS_StructDeclareChild(Foo_o, "Point");
-    dDDS_MemberCreateChild(Point_o, "x", dDDS_Long_o);
-    dDDS_MemberCreateChild(Point_o, "y", dDDS_Long_o);
+    /* Create type */
+    dDDS_ModuleCreateChild_auto(root_o, Foo);
+    dDDS_StructDeclareChild_auto(Foo_o, Point);
+    dDDS_MemberCreateChild_auto(Point_o, x, dDDS_Long_o);
+    dDDS_MemberCreateChild_auto(Point_o, y, dDDS_Long_o);
     dDDS_StructDefine(Point_o);
 
-    /* Create dynamic DDS entities */
-    dDDS_DomainParticipant dp = dDDS_DomainParticipantCreateChild(NULL, "dp", 0);
-    if (!dp) goto error;
+    /* Create DDS entities */
+    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0);
+    dDDS_TopicCreateChild_auto(dp_o, Points, Point_o, "");
+    dDDS_DataWriterCreateChild_auto(dp_o, writer, Points_o);
 
-    /* This is where the magic happens: use the dynamic Point type */
-    dDDS_Topic topic = dDDS_TopicCreateChild(dp, "Points", Point_o);
-    if (!topic) goto error;
+    /* Create sample */
+    dDDS_Object sample_o = dDDS_Object_new(Point_o, "{}");
 
-    dDDS_StringSeq partitions = {0, NULL};
-    dDDS_Publisher pub = dDDS_PublisherCreateChild(dp, "pub", partitions);
-    if (!pub) goto error;
-
-    dDDS_DataWriter writer = dDDS_DataWriterCreateChild(pub, "writer", topic);
-    if (!writer) goto error;
-
-    /* Create sample and provide initial value in JSON */
-    dDDS_Object sample = dDDS_Object_new(Point_o, "{}");
-    if (!sample) goto error;
-
+    /* Enter main loop */
     while (1) {
-        /* Set new value */
         sprintf(json, "{\"x\":%d,\"y\":%d}", x += 1, y += 2);
-        dDDS_Object_set(sample, json);
+        dDDS_Object_set(sample_o, json);
 
         printf("[writer] write sample '%s'\n", json);
-
-        /* Write sample to DDS */
-        if (dDDS_DataWriter_write(writer, sample)) {
-            dDDS_error("[writer] %s", dDDS_lasterr());
-        }
+        dDDS_DataWriter_write(writer_o, sample_o);
         corto_sleep(1, 0);
     }
 
+    /* Cleanup */
+    dDDS_delete(sample_o);
+
     return 0;
-error:
-    dDDS_error("[writer] failed: %s", dDDS_lasterr());
-    return -1;
 }

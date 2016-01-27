@@ -7,7 +7,6 @@
 #define COMPLEXTYPE_H
 
 #include "corto/corto.h"
-#include "_interface.h"
 
 #include "dDDS/dDDS.h"
 #ifdef __cplusplus

@@ -1,0 +1,4 @@
+
+TARGET = 'WaitSet'
+
+require "#{ENV['CORTO_BUILD']}/application"

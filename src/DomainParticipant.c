@@ -10,6 +10,51 @@
 
 /* $header() */
 #include "dDDS_intern.h"
+
+void* dDDS_DomainParticipant_threadMonitor(void *userData) {
+    dDDS_DomainParticipant this = userData;
+    corto_string osplTypesFilename =
+      corto_envparse(
+        "$CORTO_HOME/etc/corto/$CORTO_VERSION/packages/dDDS/etc/ospltypes.xml");
+    if (!osplTypesFilename) {
+        corto_error("threadMonitor: can't resolve path to ospltypes.xml");
+        goto error;
+    }
+
+    corto_string osplTypes = corto_fileLoad(osplTypesFilename);
+    if (!osplTypes) {
+        corto_error("threadMonitor: failed to load '%s'", osplTypesFilename);
+        goto error;
+    }
+
+    if (dDDS_fromMetaXml(osplTypes)) {
+        corto_error("threadMonitor: can't parse '%s': %s",
+            osplTypesFilename,
+            corto_lasterr());
+        goto error;
+    }
+
+    corto_type topicInfo = corto_resolve(NULL, "/kernelModule/v_topicInfo");
+    if (!topicInfo) {
+        corto_error("threadMonitor: cannot resolve v_topicInfo");
+        goto error;
+    }
+
+    /* Create topic */
+    dDDS_Topic dcpsTopic = dDDS_TopicCreateChild(
+        this,
+        "DCPSTopic",
+        topicInfo,
+        "key.localId,key.systemId");
+    if (!dcpsTopic) {
+        corto_error("threadMonitor: failed to create topic");
+        goto error;
+    }
+
+error:
+    return NULL;
+}
+
 /* $end */
 
 corto_int16 _dDDS_DomainParticipant_construct(dDDS_DomainParticipant this) {
@@ -45,12 +90,46 @@ error:
 /* $end */
 }
 
+dDDS_Publisher _dDDS_DomainParticipant_defaultPublisher(dDDS_DomainParticipant this) {
+/* $begin(dDDS/DomainParticipant/defaultPublisher) */
+    dDDS_Publisher pub_o = corto_resolve(this, "defaultPublisher");
+
+    if (!pub_o) {
+        dDDS_StringSeq partitions = {0, NULL};
+        pub_o = dDDS_PublisherCreateChild(
+            this,
+            "defaultPublisher",
+            partitions);
+    } else {
+        corto_release(pub_o);
+    }
+
+    return pub_o;
+/* $end */
+}
+
+dDDS_Subscriber _dDDS_DomainParticipant_defaultSubscriber(dDDS_DomainParticipant this) {
+/* $begin(dDDS/DomainParticipant/defaultSubscriber) */
+    dDDS_Subscriber sub_o = corto_resolve(this, "defaultSubscriber");
+
+    if (!sub_o) {
+        dDDS_StringSeq partitions = {0, NULL};
+        sub_o = dDDS_SubscriberCreateChild(
+            this,
+            "defaultSubscriber",
+            partitions);
+    } else {
+        corto_release(sub_o);
+    }
+
+    return sub_o;
+/* $end */
+}
+
 corto_void _dDDS_DomainParticipant_destruct(dDDS_DomainParticipant this) {
 /* $begin(dDDS/DomainParticipant/destruct) */
     DDS_ReturnCode_t result;
     DDS_DomainParticipant dp;
-
-    printf("Destruct\n");
 
     dp = corto_olsGet(this, DDDS_ENTITY_HANDLE);
     if (dp) {
@@ -69,5 +148,19 @@ corto_void _dDDS_DomainParticipant_destruct(dDDS_DomainParticipant this) {
         }*/
     }
 
+/* $end */
+}
+
+corto_void _dDDS_DomainParticipant_requireTopic(dDDS_DomainParticipant this, corto_string topic) {
+/* $begin(dDDS/DomainParticipant/requireTopic) */
+    corto_lock(this);
+
+    /* Add topic to list of required topics */
+    corto_llAppend(this->watchForTopics, topic);
+
+    /* If thread hasn't started yet, start it now  */
+
+
+    corto_unlock(this);
 /* $end */
 }

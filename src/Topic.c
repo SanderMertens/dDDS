@@ -36,7 +36,7 @@ corto_int16 _dDDS_Topic_construct(dDDS_Topic this) {
     }
 
     /* Get metadescriptor */
-    xml = dDDS_metaXml(this->type);
+    xml = dDDS_toMetaXml(this->type);
 
     /* Create typename */
     corto_path(typeName, root_o, this->type, "::");
@@ -44,7 +44,7 @@ corto_int16 _dDDS_Topic_construct(dDDS_Topic this) {
     /* Obtain typesupport */
     ts = DDS_TypeSupport__alloc(
         typeName,
-        "",
+        this->key,
         xml);
 
     /* Inject type */
@@ -83,8 +83,36 @@ error:
 
 corto_void _dDDS_Topic_destruct(dDDS_Topic this) {
 /* $begin(dDDS/Topic/destruct) */
+    DDS_Topic topic;
+    DDS_ReturnCode_t status;
+    corto_object dp_o;
+    DDS_DomainParticipant dp;
 
-    /* << Insert implementation >> */
+    /* Get DomainParticipant */
+    dp_o = corto_parentof(this);
+    if (!corto_instanceof(dDDS_DomainParticipant_o, dp_o)) {
+        corto_seterr(
+          "dDDS/Subscriber/destruct: parent of topic '%s' is not of type dDDS/DomainParticipant",
+          corto_fullpath(NULL, this));
+    }
+
+    /* Get entity handle of DomainParticipant */
+    dp = corto_olsGet(corto_parentof(this), DDDS_ENTITY_HANDLE);
+    if (!dp) {
+        corto_seterr(
+          "dDDS/Subscriber/destruct: invalid handle to DomainParticipant",
+          corto_fullpath(NULL, this));
+    }
+
+    /* Delete topic */
+    topic = corto_olsGet(this, DDDS_ENTITY_HANDLE);
+    if (topic) {
+        status = DDS_DomainParticipant_delete_topic(dp, topic);
+        if (status != DDS_RETCODE_OK) {
+            corto_error("dDDS/Subscriber/destruct: failed to delete subscriber %s",
+            corto_fullpath(NULL, this));
+        }
+    }
 
 /* $end */
 }

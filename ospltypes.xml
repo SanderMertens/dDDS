@@ -1,0 +1,208 @@
+
+<MetaData version="1.0.0">
+    <Module name="kernelModule">
+        <Struct name="v_gid_s">
+            <Member name="systemId">
+                <ULong/>
+            </Member>
+            <Member name="localId">
+                <ULong/>
+            </Member>
+            <Member name="serial">
+                <ULong/>
+            </Member>
+        </Struct>
+        <Enum name="v_durabilityKind">
+            <Element name="V_DURABILITY_VOLATILE" value="0"/>
+            <Element name="V_DURABILITY_TRANSIENT_LOCAL" value="1"/>
+            <Element name="V_DURABILITY_TRANSIENT" value="2"/>
+            <Element name="V_DURABILITY_PERSISTENT" value="3"/>
+        </Enum>
+        <TypeDef name="v_duration">
+            <Time/>
+        </TypeDef>
+        <Enum name="v_historyQosKind">
+            <Element name="V_HISTORY_KEEPLAST" value="0"/>
+            <Element name="V_HISTORY_KEEPALL" value="1"/>
+        </Enum>
+        <Enum name="v_livelinessKind">
+            <Element name="V_LIVELINESS_AUTOMATIC" value="0"/>
+            <Element name="V_LIVELINESS_PARTICIPANT" value="1"/>
+            <Element name="V_LIVELINESS_TOPIC" value="2"/>
+        </Enum>
+        <Enum name="v_reliabilityKind">
+            <Element name="V_RELIABILITY_BESTEFFORT" value="0"/>
+            <Element name="V_RELIABILITY_RELIABLE" value="1"/>
+        </Enum>
+        <Struct name="v_transportPolicy">
+            <Member name="value">
+                <Long/>
+            </Member>
+        </Struct>
+        <Enum name="v_orderbyKind">
+            <Element name="V_ORDERBY_RECEPTIONTIME" value="0"/>
+            <Element name="V_ORDERBY_SOURCETIME" value="1"/>
+        </Enum>
+        <Struct name="v_resourcePolicy">
+            <Member name="max_samples">
+                <Long/>
+            </Member>
+            <Member name="max_instances">
+                <Long/>
+            </Member>
+            <Member name="max_samples_per_instance">
+                <Long/>
+            </Member>
+        </Struct>
+        <Enum name="v_ownershipKind">
+            <Element name="V_OWNERSHIP_SHARED" value="0"/>
+            <Element name="V_OWNERSHIP_EXCLUSIVE" value="1"/>
+        </Enum>
+        <Struct name="v_builtinTopicDataPolicy">
+            <Member name="value">
+                <Array>
+                    <Octet/>
+                </Array>
+            </Member>
+        </Struct>
+        <TypeDef name="v_gid">
+            <Type name="v_gid_s"/>
+        </TypeDef>
+        <Struct name="v_durabilityPolicy">
+            <Member name="kind">
+                <Type name="v_durabilityKind"/>
+            </Member>
+        </Struct>
+        <Struct name="v_lifespanPolicy">
+            <Member name="duration">
+                <Type name="v_duration"/>
+            </Member>
+        </Struct>
+        <Struct name="v_latencyPolicy">
+            <Member name="duration">
+                <Type name="v_duration"/>
+            </Member>
+        </Struct>
+        <Struct name="v_deadlinePolicy">
+            <Member name="period">
+                <Type name="v_duration"/>
+            </Member>
+        </Struct>
+        <Struct name="v_historyPolicy">
+            <Member name="kind">
+                <Type name="v_historyQosKind"/>
+            </Member>
+            <Member name="depth">
+                <Long/>
+            </Member>
+        </Struct>
+        <Struct name="v_durabilityServicePolicy">
+            <Member name="service_cleanup_delay">
+                <Type name="v_duration"/>
+            </Member>
+            <Member name="history_kind">
+                <Type name="v_historyQosKind"/>
+            </Member>
+            <Member name="history_depth">
+                <Long/>
+            </Member>
+            <Member name="max_samples">
+                <Long/>
+            </Member>
+            <Member name="max_instances">
+                <Long/>
+            </Member>
+            <Member name="max_samples_per_instance">
+                <Long/>
+            </Member>
+        </Struct>
+        <Struct name="v_livelinessPolicy">
+            <Member name="kind">
+                <Type name="v_livelinessKind"/>
+            </Member>
+            <Member name="lease_duration">
+                <Type name="v_duration"/>
+            </Member>
+        </Struct>
+        <Struct name="v_reliabilityPolicy">
+            <Member name="kind">
+                <Type name="v_reliabilityKind"/>
+            </Member>
+            <Member name="max_blocking_time">
+                <Type name="v_duration"/>
+            </Member>
+            <Member name="synchronous">
+                <Boolean/>
+            </Member>
+        </Struct>
+        <Struct name="v_orderbyPolicy">
+            <Member name="kind">
+                <Type name="v_orderbyKind"/>
+            </Member>
+        </Struct>
+        <Struct name="v_ownershipPolicy">
+            <Member name="kind">
+                <Type name="v_ownershipKind"/>
+            </Member>
+        </Struct>
+        <TypeDef name="v_builtinTopicKey">
+            <Type name="v_gid"/>
+        </TypeDef>
+        <Struct name="v_topicInfo">
+            <Member name="key">
+                <Type name="v_builtinTopicKey"/>
+            </Member>
+            <Member name="name">
+                <String/>
+            </Member>
+            <Member name="type_name">
+                <String/>
+            </Member>
+            <Member name="durability">
+                <Type name="v_durabilityPolicy"/>
+            </Member>
+            <Member name="durabilityService">
+                <Type name="v_durabilityServicePolicy"/>
+            </Member>
+            <Member name="deadline">
+                <Type name="v_deadlinePolicy"/>
+            </Member>
+            <Member name="latency_budget">
+                <Type name="v_latencyPolicy"/>
+            </Member>
+            <Member name="liveliness">
+                <Type name="v_livelinessPolicy"/>
+            </Member>
+            <Member name="reliability">
+                <Type name="v_reliabilityPolicy"/>
+            </Member>
+            <Member name="transport_priority">
+                <Type name="v_transportPolicy"/>
+            </Member>
+            <Member name="lifespan">
+                <Type name="v_lifespanPolicy"/>
+            </Member>
+            <Member name="destination_order">
+                <Type name="v_orderbyPolicy"/>
+            </Member>
+            <Member name="history">
+                <Type name="v_historyPolicy"/>
+            </Member>
+            <Member name="resource_limits">
+                <Type name="v_resourcePolicy"/>
+            </Member>
+            <Member name="ownership">
+                <Type name="v_ownershipPolicy"/>
+            </Member>
+            <Member name="topic_data">
+                <Type name="v_builtinTopicDataPolicy"/>
+            </Member>
+            <Member name="meta_data">
+                <String/>
+            </Member>
+            <Member name="key_list">
+                <String/>
+            </Member>
+        </Struct>
+    </Module>
+</MetaData>

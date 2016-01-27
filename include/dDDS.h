@@ -32,14 +32,22 @@ DDDS_EXPORT void dDDS_seterr(const char* fmt, ...);
 /* Retrieve last error set by seterr */
 DDDS_EXPORT const char* dDDS_lasterr(void);
 
+/* Hide corto/core/time */
+typedef corto_time dDDS_Time;
+typedef corto_time dDDS_Duration;
 /* $end */
 
 DDDS_EXPORT corto_void _dDDS_delete(dDDS_Object object);
 #define dDDS_delete(object) _dDDS_delete(object)
 
-DDDS_EXPORT corto_string _dDDS_metaXml(corto_struct type);
-#define dDDS_metaXml(type) _dDDS_metaXml(corto_struct(type))
+DDDS_EXPORT dDDS_ReturnCode _dDDS_fromMetaXml(dDDS_String xml);
+#define dDDS_fromMetaXml(xml) _dDDS_fromMetaXml(xml)
+
+DDDS_EXPORT corto_string _dDDS_toMetaXml(corto_struct type);
+#define dDDS_toMetaXml(type) _dDDS_toMetaXml(corto_struct(type))
 #include "dDDS/Array.h"
+#include "dDDS/Condition.h"
+#include "dDDS/ConditionAction.h"
 #include "dDDS/Constant.h"
 #include "dDDS/DataReader.h"
 #include "dDDS/DataWriter.h"
@@ -49,10 +57,13 @@ DDDS_EXPORT corto_string _dDDS_metaXml(corto_struct type);
 #include "dDDS/Module.h"
 #include "dDDS/Object.h"
 #include "dDDS/Publisher.h"
+#include "dDDS/ReadCondition.h"
 #include "dDDS/Sequence.h"
 #include "dDDS/Struct.h"
 #include "dDDS/Subscriber.h"
 #include "dDDS/Topic.h"
+#include "dDDS/Typedef.h"
+#include "dDDS/WaitSet.h"
 
 #ifdef __cplusplus
 }

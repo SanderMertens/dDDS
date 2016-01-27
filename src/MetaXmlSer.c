@@ -973,7 +973,7 @@ dDDS_printXmlCollection(
         elementName = "Array";
         break;
     default:
-        corto_error("dDDS_printXmlCollectio: unsupported collectionkind for DDS-serializer.");
+        corto_error("dDDS_printXmlCollection: unsupported collectionkind for DDS-serializer.");
         break;
     }
 

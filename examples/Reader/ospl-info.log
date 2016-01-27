@@ -1,0 +1,654 @@
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <9695>
+Thread      : spliced b76a0b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453128970.293807318
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 448176605 from [1,2147483647]
+Node        : ubuntu
+Process     : app <9695>
+Thread      : spliced b76a0b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453128970.300757469
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <9695>
+Thread      : spliced b76a0b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453128970.302095103
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <9695>
+Thread      : durability b6272b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453128970.306803392
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : SOAP service is reachable via port 35422
+Node        : ubuntu
+Process     : app <9695>
+Thread      : cmsoap b648bb40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453128970.307546496
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <9695>
+Thread      : cmsoap b648bb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453128970.307998626
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <9695>
+Thread      : ddsi2 b5ec9b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453128970.309074147
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <9695>
+Thread      : ddsi2 b5ec9b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453128970.318316677
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 09:56:10 EST 2016
+Description : The durability service can be identified by ID: 448176605
+Node        : ubuntu
+Process     : app <9695>
+Thread      : durability b6272b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453128970.526983351
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <11113>
+Thread      : spliced b76dfb40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453132060.762944951
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 315796741 from [1,2147483647]
+Node        : ubuntu
+Process     : app <11113>
+Thread      : spliced b76dfb40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453132060.771216970
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <11113>
+Thread      : spliced b76dfb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453132060.772634087
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <11113>
+Thread      : durability b6372b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453132060.777534035
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : SOAP service is reachable via port 60583
+Node        : ubuntu
+Process     : app <11113>
+Thread      : cmsoap b658bb40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453132060.777668072
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <11113>
+Thread      : cmsoap b658bb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453132060.778005937
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <11113>
+Thread      : ddsi2 b5fc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453132060.779575425
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:40 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <11113>
+Thread      : ddsi2 b5fc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453132060.787949881
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:41 EST 2016
+Description : The durability service can be identified by ID: 315796741
+Node        : ubuntu
+Process     : app <11113>
+Thread      : durability b6372b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453132061.097755931
+========================================================================================
+Report      : INFO
+Date        : Mon Jan 18 10:47:48 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <11113>
+Thread      : durability b6372b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453132068.513617446
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <26315>
+Thread      : spliced b7664b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453871181.020947240
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 2107860608 from [1,2147483647]
+Node        : ubuntu
+Process     : app <26315>
+Thread      : spliced b7664b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453871181.028058370
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <26315>
+Thread      : spliced b7664b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453871181.029694871
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : SOAP service is reachable via port 43056
+Node        : ubuntu
+Process     : app <26315>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453871181.036241769
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <26315>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453871181.036522544
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <26315>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453871181.036919477
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <26315>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453871181.038519684
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <26315>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453871181.047156081
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:21 EST 2016
+Description : The durability service can be identified by ID: 2107860608
+Node        : ubuntu
+Process     : app <26315>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453871181.152390532
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:06:28 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <26315>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453871188.176419742
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <28235>
+Thread      : spliced b7602b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453872413.366166290
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 1029127812 from [1,2147483647]
+Node        : ubuntu
+Process     : app <28235>
+Thread      : spliced b7602b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453872413.373316610
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <28235>
+Thread      : spliced b7602b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453872413.374813456
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : SOAP service is reachable via port 34267
+Node        : ubuntu
+Process     : app <28235>
+Thread      : cmsoap b640ab40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453872413.379601412
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <28235>
+Thread      : durability b61f1b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453872413.379722484
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <28235>
+Thread      : cmsoap b640ab40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453872413.379873743
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <28235>
+Thread      : ddsi2 b5df0b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453872413.381641622
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <28235>
+Thread      : ddsi2 b5df0b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453872413.390702881
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:26:53 EST 2016
+Description : The durability service can be identified by ID: 1029127812
+Node        : ubuntu
+Process     : app <28235>
+Thread      : durability b61f1b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453872413.496165617
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:27:00 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <28235>
+Thread      : durability b61f1b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453872420.521183896
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30249>
+Thread      : spliced b76cdb40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453873634.758060509
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 440896924 from [1,2147483647]
+Node        : ubuntu
+Process     : app <30249>
+Thread      : spliced b76cdb40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453873634.765686794
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30249>
+Thread      : spliced b76cdb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873634.767085019
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30249>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453873634.772491978
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : SOAP service is reachable via port 41161
+Node        : ubuntu
+Process     : app <30249>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453873634.773098604
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30249>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873634.773376783
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30249>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453873634.777826659
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30249>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873634.785655697
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:14 EST 2016
+Description : The durability service can be identified by ID: 440896924
+Node        : ubuntu
+Process     : app <30249>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453873634.988754467
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:22 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30249>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873642.310086004
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ++++++++++++++++++++++++++++++++
+              ++ spliced EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30323>
+Thread      : spliced b7685b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/spliced.c/1346/0/1453873643.057314546
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ---------------------------------------------------------------
+              -- The service is using the following configuration settings --
+              ---------------------------------------------------------------
+              Domain (id)          : ospl_sp_ddsi (0)
+              Storage              : 10240 Kbytes
+              Storage threshold    : 1024 Kbytes
+              Storage address      : Not available
+              Locking              : default
+              Memory mode          : Heap memory
+              Builtin topics       : true
+              Priority inheritance : false
+              SystemId             : 275208766 from [1,2147483647]
+Node        : ubuntu
+Process     : app <30323>
+Thread      : spliced b7685b40
+Internals   : 6.6.0p1/024647c/5574fd7/The OpenSplice domain service/u_domain.c/627/0/1453873643.063393363
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'splicedaemon' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30323>
+Thread      : spliced b7685b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873643.064899114
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : +++++++++++++++++++++++++++++++++++
+              ++ durability EVALUATION VERSION ++
+              +++++++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30323>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/d_durability/d_durability.c/1452/0/1453873643.069435209
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : SOAP service is reachable via port 34175
+Node        : ubuntu
+Process     : app <30323>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/CM SOAP Service/cms_service.c/471/0/1453873643.069573767
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'cmsoap' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30323>
+Thread      : cmsoap b638bb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873643.069902942
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ++++++++++++++++++++++++++++++
+              ++ ddsi2 EVALUATION VERSION ++
+              ++++++++++++++++++++++++++++++
+
+Node        : ubuntu
+Process     : app <30323>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/q_main/q_main.c/2452/0/1453873643.071174236
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'ddsi2' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30323>
+Thread      : ddsi2 b5dc9b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873643.079980787
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:23 EST 2016
+Description : The durability service can be identified by ID: 275208766
+Node        : ubuntu
+Process     : app <30323>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/DurabilityService/d_durability.c/676/0/1453873643.181936549
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:47:30 EST 2016
+Description : ++++++++++++++++++++++++++++++++++++++++++++++++
+              ++ The service 'durability' is now operational. 
+              ++++++++++++++++++++++++++++++++++++++++++++++++
+Node        : ubuntu
+Process     : app <30323>
+Thread      : durability b6172b40
+Internals   : 6.6.0p1/024647c/5574fd7/v_serviceChangeState/v_service.c/286/0/1453873650.601266923
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 00:49:33 EST 2016
+Description : Missed heartbeat for node 1717886035. (DCPSPublication is complete)
+Node        : ubuntu
+Process     : app <30323>
+Thread      : OSPL Garbage Collector b66ffb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_spliced/v_spliced.c/2350/773/1453873773.497099216
+========================================================================================
+Report      : INFO
+Date        : Wed Jan 27 01:25:15 EST 2016
+Description : Missed heartbeat for node 486646634. (DCPSPublication is complete)
+Node        : ubuntu
+Process     : app <30323>
+Thread      : OSPL Garbage Collector b66ffb40
+Internals   : 6.6.0p1/024647c/5574fd7/v_spliced/v_spliced.c/2350/773/1453875915.532586862

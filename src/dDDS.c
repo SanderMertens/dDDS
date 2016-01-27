@@ -64,8 +64,21 @@ corto_void _dDDS_delete(dDDS_Object object) {
 /* $end */
 }
 
-corto_string _dDDS_metaXml(corto_struct type) {
-/* $begin(dDDS/metaXml) */
+dDDS_ReturnCode _dDDS_fromMetaXml(dDDS_String xml) {
+/* $begin(dDDS/fromMetaXml) */
+
+    if (dDDS_metaXmlParse(xml)) {
+        goto error;
+    }
+
+    return 0;
+error:
+    return -1;
+/* $end */
+}
+
+corto_string _dDDS_toMetaXml(corto_struct type) {
+/* $begin(dDDS/toMetaXml) */
 
     return dDDS_metaXmlGet(corto_type(type));
 

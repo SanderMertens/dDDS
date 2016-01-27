@@ -15,8 +15,10 @@
 corto_int16 _dDDS_DataWriter_construct(dDDS_DataWriter this) {
 /* $begin(dDDS/DataWriter/construct) */
     DDS_Publisher pub;
+    dDDS_Publisher pub_o;
     DDS_Topic topic;
     DDS_DataWriter writer;
+    corto_object parent;
 
     /* DDS entities will be created in scopes of each other, so enforce that
      * the created object is scoped */
@@ -25,10 +27,25 @@ corto_int16 _dDDS_DataWriter_construct(dDDS_DataWriter this) {
         goto error;
     }
 
-    /* Get Publisher */
-    pub = dDDS_getEntity(corto_parentof(this), dDDS_Publisher_o);
-    if (!pub) {
-        corto_seterr("dDDS/DataWriter/construct: %s", corto_lasterr());
+    /* Accept both DomainParticipants and Publishers as parent */
+    parent = corto_parentof(this);
+    if (corto_instanceof(dDDS_Publisher_o, parent)) {
+        pub_o = parent;
+        pub = dDDS_getEntity(parent, dDDS_Publisher_o);
+
+    } else if (corto_instanceof(dDDS_DomainParticipant_o, parent)) {
+        pub_o = dDDS_DomainParticipant_defaultPublisher(parent);
+        if (!pub_o) {
+            corto_seterr("dDDS/DataReader/construct: %s", corto_lasterr());
+            goto error;
+        }
+
+        pub = dDDS_getEntity(pub_o, dDDS_Publisher_o);
+    } else {
+        corto_seterr(
+            "dDDS/DataWriter/construct: invalid type '%s' for parent '%s'",
+            corto_fullpath(NULL, corto_typeof(parent)),
+            corto_fullpath(NULL, parent));
         goto error;
     }
 
@@ -52,6 +69,9 @@ corto_int16 _dDDS_DataWriter_construct(dDDS_DataWriter this) {
         goto error;
     }
 
+    /* Set publisher */
+    corto_setref(&this->publisher, pub_o);
+
     /* Set entity handle of object */
     corto_olsSet(this, DDDS_ENTITY_HANDLE, writer);
 
@@ -65,7 +85,7 @@ corto_void _dDDS_DataWriter_destruct(dDDS_DataWriter this) {
 /* $begin(dDDS/DataWriter/destruct) */
     DDS_DataWriter writer = dDDS_getEntity(this, dDDS_DataWriter_o);
     if (writer) {
-        DDS_Publisher pub = dDDS_getEntity(this, dDDS_Publisher_o);
+        DDS_Publisher pub = dDDS_getEntity(this->publisher, dDDS_Publisher_o);
         DDS_ReturnCode_t status;
         if (!pub) {
             corto_error("dDDS/DataWriter/destruct: %s", corto_lasterr());
@@ -80,7 +100,7 @@ corto_void _dDDS_DataWriter_destruct(dDDS_DataWriter this) {
 /* $end */
 }
 
-corto_int16 _dDDS_DataWriter_write(dDDS_DataWriter this, corto_object sample) {
+dDDS_ReturnCode _dDDS_DataWriter_write(dDDS_DataWriter this, dDDS_Object sample) {
 /* $begin(dDDS/DataWriter/write) */
     DDS_DataWriter writer = dDDS_getEntity(this, dDDS_DataWriter_o);
 
