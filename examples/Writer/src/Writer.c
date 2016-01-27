@@ -1,6 +1,7 @@
 #include "Writer.h"
 
-int WriterMain(int argc, char *argv[]) {
+int WriterMain(int argc, char *argv[])
+{
     char json[256];
     int x = 0, y = 0;
 

@@ -1,7 +1,7 @@
 #include "Reader.h"
 
-int ReaderMain(int argc, char *argv[]) {
-
+int ReaderMain(int argc, char *argv[])
+{
     /* Create type */
     dDDS_ModuleCreateChild_auto(root_o, Foo);
     dDDS_StructDeclareChild_auto(Foo_o, Point);

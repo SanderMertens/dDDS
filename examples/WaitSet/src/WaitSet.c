@@ -16,34 +16,39 @@ void action(dDDS_Object sampleSeq, dDDS_Object cond)
 int WaitSetMain(int argc, char *argv[])
 {
     /* Create type */
-    dDDS_Module Foo_o = dDDS_ModuleCreateChild(root_o, "Foo");
-    dDDS_Struct Point_o = dDDS_StructDeclareChild(Foo_o, "Point");
-    dDDS_MemberCreateChild(Point_o, "x", dDDS_Long_o);
-    dDDS_MemberCreateChild(Point_o, "y", dDDS_Long_o);
+    dDDS_ModuleCreateChild_auto(root_o, Foo);
+    dDDS_StructDeclareChild_auto(Foo_o, Point);
+    dDDS_MemberCreateChild_auto(Point_o, x, dDDS_Long_o);
+    dDDS_MemberCreateChild_auto(Point_o, y, dDDS_Long_o);
     dDDS_StructDefine(Point_o);
 
     /* Create DDS entities */
-    dDDS_DomainParticipant dp = dDDS_DomainParticipantCreateChild(NULL, "dp", 0);
-    dDDS_Topic topic = dDDS_TopicCreateChild(dp, "Points", Point_o, "");
-    dDDS_DataReader reader = dDDS_DataReaderCreateChild(dp, "reader", topic);
+    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0);
+    dDDS_TopicCreateChild_auto(dp_o, Points, Point_o, "");
+    dDDS_DataReaderCreateChild_auto(dp_o, reader, Points_o);
 
     /* Create condition & callback
      * Allocate sampleSeq once, reuse in callback. */
-    dDDS_ObjectSeq sampleSeq = dDDS_ObjectSeqCreate();
+    dDDS_ObjectSeqCreate_auto(sampleSeq);
     dDDS_ConditionAction rcAction;
-    dDDS_ConditionActionInitNative(&rcAction, action, sampleSeq);
-    dDDS_ReadCondition rc = dDDS_ReadConditionCreateChild(
-        reader, "rc", rcAction, dDDS_NotRead, dDDS_Any, dDDS_Any);
+    dDDS_ConditionActionInitNative(&rcAction, action, sampleSeq_o);
+    dDDS_ReadConditionCreateChild_auto(
+      reader_o, rc, rcAction, dDDS_NotRead, dDDS_Any, dDDS_Any);
 
     /* Setup waitset */
-    dDDS_WaitSet ws = dDDS_WaitSetCreate();
-    dDDS_WaitSet_attach(ws, rc);
+    dDDS_WaitSetCreate(ws);
+    dDDS_WaitSet_attach(ws_o, rc_o);
 
     /* Enter wait loop */
     while (TRUE) {
         dDDS_Duration timeout = {-1, -1};
-        dDDS_WaitSet_dispatch(ws, &timeout);
+        dDDS_WaitSet_dispatch(ws_o, &timeout);
     }
+
+    /* Cleanup */
+    dDDS_ConditionActionDeinit(&rcAction);
+    dDDS_delete(sampleSeq_o);
+    dDDS_delete(ws_o);
 
     return 0;
 }
