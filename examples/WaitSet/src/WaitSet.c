@@ -1,5 +1,28 @@
 #include "WaitSet.h"
 
+/* WaitSet example
+ *
+ * This example demonstrates how a waitset can used with a dynamic reader. The
+ * example uses a ReadCondition. The code demonstrates how delegates
+ * are used by the API to automatically dispatch actions associated with a
+ * condition (much like the isocpp API).
+ *
+ * The 'callback' function is completely generic and could be reused for
+ * readers of different types. Note the usage of reflection with the
+ * dDDS_Object_typeof, dDDS_Object_nameof and dDDS_Object_parentof functions.
+ *
+ * The example uses generated _auto macro's which results in more concise code.
+ * These macro's 'emulate' C++'s auto behavior by automatically declaring a
+ * variable of the correct type.
+ *
+ * Without _auto:
+ *   dDDS_Struct Point = dDDS_StructDeclareChild(dp, "Point");
+ *
+ * With _auto:
+ *   dDDS_StructDeclareChild_auto(Foo, Point);
+ *
+ */
+
 void callback(dDDS_Object this, dDDS_Object cond)
 {
     dDDS_ReadCondition rc = dDDS_ReadCondition(cond);

@@ -1,5 +1,23 @@
 #include "Writer.h"
 
+/* Writer example
+ *
+ * This example demonstrates how a dynamic DataWriter can be used. Note how the
+ * value of a DynamicObject is set with JSON. JSON is just one example of how
+ * a sample's value can be set.
+ *
+ * The example uses generated _auto macro's which results in more concise code.
+ * These macro's 'emulate' C++'s auto behavior by automatically declaring a
+ * variable of the correct type.
+ *
+ * Without _auto:
+ *   dDDS_Struct Point = dDDS_StructDeclareChild(dp, "Point");
+ *
+ * With _auto:
+ *   dDDS_StructDeclareChild_auto(Foo, Point);
+ *
+ */
+
 int WriterMain(int argc, char *argv[])
 {
     char json[256];
