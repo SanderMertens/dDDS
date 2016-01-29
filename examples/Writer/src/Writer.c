@@ -31,9 +31,9 @@ int WriterMain(int argc, char *argv[])
     dDDS_StructDefine(Point);
 
     /* Create DDS entities */
-    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0);
-    dDDS_TopicCreateChild_auto(dp, PointTopic, Point, "");
-    dDDS_DataWriterCreateChild_auto(dp, writer, PointTopic);
+    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0, dDDS_DefaultQos);
+    dDDS_TopicCreateChild_auto(dp, PointTopic, Point, "", dDDS_DefaultQos);
+    dDDS_DataWriterCreateChild_auto(dp, writer, PointTopic, dDDS_DefaultQos);
 
     /* Create sample */
     dDDS_Object sample = dDDS_Object_new(Point, "{}");

@@ -43,21 +43,6 @@ corto_int16 _dDDS_Subscriber_construct(dDDS_Subscriber this) {
          goto error;
      }
 
-     qos.partition.name._length = this->partitions.length;
-     qos.partition.name._maximum = this->partitions.length;
-     if (this->partitions.length) {
-         qos.partition.name._buffer = DDS_StringSeq_allocbuf (this->partitions.length);
-         if (!qos.partition.name._buffer) {
-             corto_seterr("dDDS/Subscriber/construct: failed to allocate partition buffer");
-             goto error;
-         }
-     }
-
-     corto_int32 i = 0;
-     dDDS_StringSeqForeach(this->partitions, p) {
-         qos.partition.name._buffer[i ++] = DDS_string_dup(p);
-     }
-
      /* Create subscriber */
      sub = DDS_DomainParticipant_create_subscriber(dp, &qos, NULL, DDS_STATUS_MASK_NONE);
      if (!sub) {

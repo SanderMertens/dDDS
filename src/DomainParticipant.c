@@ -45,7 +45,8 @@ void* dDDS_DomainParticipant_threadMonitor(void *userData) {
         this,
         "DCPSTopic",
         topicInfo,
-        "key.localId,key.systemId");
+        "key.localId,key.systemId",
+        dDDS_DefaultQos);
     if (!dcpsTopic) {
         corto_error("threadMonitor: failed to create topic");
         goto error;
@@ -95,11 +96,10 @@ dDDS_Publisher _dDDS_DomainParticipant_defaultPublisher(dDDS_DomainParticipant t
     dDDS_Publisher pub_o = corto_resolve(this, "defaultPublisher");
 
     if (!pub_o) {
-        dDDS_StringSeq partitions = {0, NULL};
         pub_o = dDDS_PublisherCreateChild(
             this,
             "defaultPublisher",
-            partitions);
+            dDDS_DefaultQos);
     } else {
         corto_release(pub_o);
     }
@@ -113,11 +113,10 @@ dDDS_Subscriber _dDDS_DomainParticipant_defaultSubscriber(dDDS_DomainParticipant
     dDDS_Subscriber sub_o = corto_resolve(this, "defaultSubscriber");
 
     if (!sub_o) {
-        dDDS_StringSeq partitions = {0, NULL};
         sub_o = dDDS_SubscriberCreateChild(
             this,
             "defaultSubscriber",
-            partitions);
+            dDDS_DefaultQos);
     } else {
         corto_release(sub_o);
     }

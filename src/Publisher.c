@@ -42,22 +42,7 @@ corto_int16 _dDDS_Publisher_construct(dDDS_Publisher this) {
           "dDDS/Publisher/construct: could not get default Publisher qos");
         goto error;
     }
-
-    qos.partition.name._length = this->partitions.length;
-    qos.partition.name._maximum = this->partitions.length;
-    if (this->partitions.length) {
-        qos.partition.name._buffer = DDS_StringSeq_allocbuf (this->partitions.length);
-        if (!qos.partition.name._buffer) {
-            corto_seterr("dDDS/Publisher/construct: failed to allocate partition buffer");
-            goto error;
-        }
-    }
-
-    corto_int32 i = 0;
-    dDDS_StringSeqForeach(this->partitions, p) {
-        qos.partition.name._buffer[i ++] = DDS_string_dup(p);
-    }
-
+    
     /* Create publisher */
     pub = DDS_DomainParticipant_create_publisher(dp, &qos, NULL, DDS_STATUS_MASK_NONE);
     if (!pub) {

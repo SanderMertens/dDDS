@@ -27,6 +27,7 @@ Dynamic DDS API.
 ### construct()
 #### Returns
 ### destruct()
+### qos
 ### read(/dDDS/ObjectSeq& sampleSeq,/dDDS/ULong length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
 #### sampleSeq
 #### length
@@ -60,15 +61,72 @@ Dynamic DDS API.
 #### Returns
 ### topic
 
+## DataReaderQos
+### deadline
+### destination_order
+### durability
+### durability_service
+### from_topic(/dDDS/Topic topic)
+#### topic
+### get_default()
+### history
+### latency_budget
+### lifespan
+### liveliness
+### ownership
+### reader_data_lifecycle
+### reliability
+### resource_limits
+### time_based_filter
+### transport_priority
+### user_data
+
 ## DataWriter
 ### construct()
 #### Returns
 ### destruct()
 ### publisher
+### qos
 ### topic
 ### write(/dDDS/Object sample)
 #### sample
 #### Returns
+
+## DataWriterQos
+### construct()
+#### Returns
+### deadline
+### destination_order
+### durability
+### durability_service
+### from_topic(/dDDS/Topic topic)
+#### topic
+### get_default()
+### history
+### init()
+#### Returns
+### latency_budget
+### lifespan
+### liveliness
+### ownership
+### ownership_strength
+### reliability
+### resource_limits
+### transport_priority
+### user_data
+### writer_data_lifecycle
+
+## DeadlineQosPolicy
+### period
+
+## DestinationOrderQosPolicy
+### kind
+
+## DestinationOrderQosPolicyKind
+### BY_RECEPTION_TIMESTAMP
+### BY_SOURCE_TIMESTAMP
+
+## DomainId_t
 
 ## DomainParticipant
 ### construct()
@@ -79,15 +137,66 @@ Dynamic DDS API.
 #### Returns
 ### destruct()
 ### id
+### qos
 ### requireTopic(string topic)
 #### topic
 ### watchForTopics
 
+## DomainParticipantFactoryQos
+### entity_factory
+### get_default()
+
+## DomainParticipantQos
+### entity_factory
+### get_default()
+### user_data
+
 ## Double
+
+## DurabilityQosPolicy
+### kind
+
+## DurabilityQosPolicyKind
+### Persistent
+### Transient
+### TransientLocal
+### Volatile
+
+## DurabilityServiceQosPolicy
+### history_depth
+### history_kind
+### max_instances
+### max_samples
+### max_samples_per_instance
+### service_cleanup_delay
+
+## EntityFactoryQosPolicy
+### autoenable_created_entities
+
+## EntityQos
+### __dummy
+### get_default()
 
 ## Enum
 
 ## Float
+
+## GroupDataQosPolicy
+### value
+
+## HistoryQosPolicy
+### depth
+### kind
+
+## HistoryQosPolicyKind
+### KeepAll
+### KeepLast
+
+## InconsistentTopicStatus
+### total_count
+### total_count_change
+
+## InstanceHandle_t
 
 ## InstanceState
 ### Alive
@@ -95,6 +204,32 @@ Dynamic DDS API.
 ### Disposed
 ### NotAlive
 ### NoWriters
+
+## LatencyBudgetQosPolicy
+### duration
+
+## LifespanQosPolicy
+### duration
+
+## LivelinessChangedStatus
+### alive_count
+### alive_count_change
+### last_publication_handle
+### not_alive_count
+### not_alive_count_change
+
+## LivelinessLostStatus
+### total_count
+### total_count_change
+
+## LivelinessQosPolicy
+### kind
+### lease_duration
+
+## LivelinessQosPolicyKind
+### Automatic
+### ManualByParticipant
+### ManualByTopic
 
 ## Long
 
@@ -130,11 +265,67 @@ Dynamic DDS API.
 
 ## Octet
 
+## OfferedDeadlineMissedStatus
+### last_instance_handle
+### total_count
+### total_count_change
+
+## OfferedIncompatibleQosStatus
+### last_policy_id
+### policies
+### total_count
+### total_count_change
+
+## OwnershipQosPolicy
+### kind
+
+## OwnershipQosPolicyKind
+### Exclusive
+### Shared
+
+## OwnershipStrengthQosPolicy
+### value
+
+## PartitionQosPolicy
+
+## PresentationQosPolicy
+### accessScope
+### AccessScopeKind
+### coherent_access
+### ordered_access
+
+## PresentationQosPolicy/AccessScopeKind
+### GroupScope
+### InstanceScope
+### TopicScope
+
+## PublicationMatchedStatus
+### current_count
+### current_count_change
+### last_subscription_handle
+### total_count
+### total_count_change
+
 ## Publisher
 ### construct()
 #### Returns
 ### destruct()
-### partitions
+### qos
+
+## PublisherQos
+### entity_factory
+### get_default()
+### group_data
+### partition
+### presentation
+
+## QosPolicyCount
+### count
+### policy_id
+
+## QosPolicyCountSeq
+
+## QosPolicyId_t
 
 ## ReadCondition
 ### construct()
@@ -143,6 +334,34 @@ Dynamic DDS API.
 ### instanceState
 ### sampleState
 ### viewState
+
+## ReaderDataLifecycleQosPolicy
+### autopurge_disposed_samples_delay
+### autopurge_nowriter_samples_delay
+
+## ReliabilityQosPolicy
+### kind
+### max_blocking_time
+
+## ReliabilityQosPolicyKind
+### BestEffort
+### Reliable
+
+## RequestedDeadlineMissedStatus
+### last_instance_handle
+### total_count
+### total_count_change
+
+## RequestedIncompatibleQosStatus
+### last_policy_id
+### policies
+### total_count
+### total_count_change
+
+## ResourceLimitsQosPolicy
+### max_instances
+### max_samples
+### max_samples_per_instance
 
 ## ReturnCode
 ### AlreadyDeleted
@@ -159,6 +378,22 @@ Dynamic DDS API.
 ### Timeout
 ### Unsupported
 
+## SampleLostStatus
+### total_count
+### total_count_change
+
+## SampleRejectedStatus
+### last_instance_handle
+### last_reason
+### total_count
+### total_count_change
+
+## SampleRejectedStatusKind
+### NotRejected
+### RejectedByInstancesLimit
+### RejectedBySamplesLimit
+### RejectedBySamplesPerInstanceLimit
+
 ## SampleState
 ### Any
 ### NotRead
@@ -168,6 +403,21 @@ Dynamic DDS API.
 
 ## Short
 
+## Status
+### DataAvailable
+### DataOnReaders
+### InconsistentTopic
+### LivelinessChanged
+### LivelinessLost
+### OfferedDeadlineMissed
+### OfferedIncompatibleQos
+### PublicationChanged
+### RequestedDeadlineMissed
+### RequestedIncompatibleQos
+### SampleLost
+### SampleRejected
+### SubscriptionMatched
+
 ## String
 
 ## Struct
@@ -176,14 +426,58 @@ Dynamic DDS API.
 ### construct()
 #### Returns
 ### destruct()
-### partitions
+### qos
+
+## SubscriberQos
+### entity_factory
+### get_default()
+### group_data
+### partition
+### presentation
+
+## SubscriptionMatchedStatus
+### current_count
+### current_count_change
+### last_publication_handle
+### total_count
+### total_count_change
+
+## TimeBasedFilterQosPolicy
+### minimum_separation
 
 ## Topic
 ### construct()
 #### Returns
 ### destruct()
 ### key
+### qos
 ### type
+
+## TopicDataQosPolicy
+### value
+
+## TopicQos
+### construct()
+#### Returns
+### deadline
+### destination_order
+### durability
+### durability_service
+### get_default()
+### history
+### init()
+#### Returns
+### latency_budget
+### lifespan
+### liveliness
+### ownership
+### reliability
+### resource_limits
+### topic_data
+### transport_priority
+
+## TransportPriorityQosPolicy
+### value
 
 ## Typedef
 ### type
@@ -191,6 +485,9 @@ Dynamic DDS API.
 ## ULong
 
 ## ULongLong
+
+## UserDataQosPolicy
+### value
 
 ## UShort
 
@@ -213,3 +510,6 @@ Dynamic DDS API.
 ### dispatch(/corto/core/time timeout)
 #### timeout
 #### Returns
+
+## WriterDataLifecycleQosPolicy
+### autodispose_unregistered_instances

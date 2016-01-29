@@ -1,20 +1,9 @@
 #package ::dDDS
 
-// API result
-enum ReturnCode::
-    Ok: 0
-    Error: 1
-    Unsupported: 2
-    BadParameter: 3
-    PreconditionNotMet: 4
-    OutOfResources: 5
-    NotEnabled: 6
-    ImmutablePolicy: 7
-    InconsistentPolicy: 8
-    AlreadyDeleted: 9
-    Timeout: 10
-    NoData: 11
-    IllegalOperation: 12
+
+// ------------------------------------------------------------
+// Type System
+// ------------------------------------------------------------
 
 // Module
 class Module : core/package, hidden
@@ -53,6 +42,28 @@ class Sequence : lang/sequence
 struct Typedef::
     type : object
 
+
+
+// ------------------------------------------------------------
+// Utilities
+// ------------------------------------------------------------
+
+// API result
+enum ReturnCode::
+    Ok: 0
+    Error: 1
+    Unsupported: 2
+    BadParameter: 3
+    PreconditionNotMet: 4
+    OutOfResources: 5
+    NotEnabled: 6
+    ImmutablePolicy: 7
+    InconsistentPolicy: 8
+    AlreadyDeleted: 9
+    Timeout: 10
+    NoData: 11
+    IllegalOperation: 12
+
 // Generic reference for samples
 type Object: lang/typeKind/VOID, true ::
     dDDS/Object new(dDDS/Struct type, string json)
@@ -61,6 +72,7 @@ type Object: lang/typeKind/VOID, true ::
     dDDS/Object parentof(dDDS/Object this)
     dDDS/String nameof(dDDS/Object this)
     lang/type typeof(dDDS/Object this)
+
 
 // Wrappers to hide Corto functions
 void @delete(dDDS/Object object)
@@ -72,14 +84,369 @@ string toMetaXml(lang/struct type)
 // Inject type from metadescriptor
 ReturnCode fromMetaXml(dDDS/String xml)
 
+int InstanceHandle_t: width_32
+int QosPolicyId_t: width_32
+int DomainId_t: width_32
+
+// ------------------------------------------------------------
+// Status to support listeners and conditions
+// ------------------------------------------------------------
+bitmask Status::
+    InconsistentTopic:            0x0001 << 0
+    OfferedDeadlineMissed:        0x0001 << 1
+    RequestedDeadlineMissed:      0x0001 << 2
+    OfferedIncompatibleQos:       0x0001 << 5
+    RequestedIncompatibleQos:     0x0001 << 6
+    SampleLost:                   0x0001 << 7
+    SampleRejected:               0x0001 << 8
+    DataOnReaders:                0x0001 << 9
+    DataAvailable:                0x0001 << 10
+    LivelinessLost:               0x0001 << 11
+    LivelinessChanged:            0x0001 << 12
+    PublicationChanged:           0x0001 << 13
+    SubscriptionMatched:          0x0001 << 14
+
+struct InconsistentTopicStatus::
+    total_count: Long
+    total_count_change: Long
+
+struct SampleLostStatus::
+    total_count: Long
+    total_count_change: Long
+
+enum SampleRejectedStatusKind::
+    NotRejected
+    RejectedByInstancesLimit
+    RejectedBySamplesLimit
+    RejectedBySamplesPerInstanceLimit
+
+struct SampleRejectedStatus::
+    total_count: Long
+    total_count_change: Long
+    last_reason: SampleRejectedStatusKind
+    last_instance_handle: InstanceHandle_t
+
+struct LivelinessLostStatus::
+    total_count: Long
+    total_count_change: Long
+
+struct LivelinessChangedStatus::
+    alive_count: Long
+    not_alive_count: Long
+    alive_count_change: Long
+    not_alive_count_change: Long
+    last_publication_handle: InstanceHandle_t
+
+struct OfferedDeadlineMissedStatus::
+    total_count: Long
+    total_count_change: Long
+    last_instance_handle: InstanceHandle_t
+
+struct RequestedDeadlineMissedStatus::
+    total_count: Long
+    total_count_change: Long
+    last_instance_handle: InstanceHandle_t
+
+struct QosPolicyCount::
+    policy_id : QosPolicyId_t
+    count: Long
+
+sequence QosPolicyCountSeq: QosPolicyCount
+
+struct OfferedIncompatibleQosStatus::
+    total_count: Long
+    total_count_change: Long
+    last_policy_id: QosPolicyId_t
+    policies: QosPolicyCountSeq
+
+struct RequestedIncompatibleQosStatus::
+    total_count: Long
+    total_count_change: Long
+    last_policy_id: QosPolicyId_t
+    policies: QosPolicyCountSeq
+
+struct PublicationMatchedStatus::
+    total_count: Long
+    total_count_change: Long
+    current_count: Long
+    current_count_change: Long
+    last_subscription_handle: InstanceHandle_t
+
+struct SubscriptionMatchedStatus::
+    total_count: Long
+    total_count_change: Long
+    current_count: Long
+    current_count_change: Long
+    last_publication_handle: InstanceHandle_t
+
+// ------------------------------------------------------------
+// QoS
+// ------------------------------------------------------------
+void QOS_POLICY_NAME:: // Group objects, reduce verbosity and clutter
+    string USERDATA: "UserData"
+    string DURABILITY: "Durability"
+    string PRESENTATION: "Presentation"
+    string DEADLINE: "Deadline"
+    string LATENCYBUDGET: "LatencyBudget"
+    string OWNERSHIP: "Ownership"
+    string OWNERSHIPSTRENGTH: "OwnershipStrength"
+    string LIVELINESS: "Liveliness"
+    string TIMEBASEDFILTER: "TimeBasedFilter"
+    string PARTITION: "Partition"
+    string RELIABILITY: "Reliability"
+    string DESTINATIONORDER: "DestinationOrder"
+    string HISTORY: "History"
+    string RESOURCELIMITS: "ResourceLimits"
+    string ENTITYFACTORY: "EntityFactory"
+    string WRITERDATALIFECYCLE: "WriterDataLifecycle"
+    string READERDATALIFECYCLE: "ReaderDataLifecycle"
+    string TOPICDATA: "TopicData"
+    string GROUPDATA: "GroupData"
+    string TRANSPORTPRIORITY: "TransportPriority"
+    string LIFESPAN: "Lifespan"
+    string DURABILITYSERVICE: "DurabilityService"
+
+object QOS_POLICY_ID::
+    QosPolicyId_t INVALID{0}
+    QosPolicyId_t USERDATA{1}
+    QosPolicyId_t DURABILITY{2}
+    QosPolicyId_t PRESENTATION{3}
+    QosPolicyId_t DEADLINE{4}
+    QosPolicyId_t LATENCYBUDGET{5}
+    QosPolicyId_t OWNERSHIP{6}
+    QosPolicyId_t OWNERSHIPSTRENGTH{7}
+    QosPolicyId_t LIVELINESS{8}
+    QosPolicyId_t TIMEBASEDFILTER{9}
+    QosPolicyId_t PARTITION{10}
+    QosPolicyId_t RELIABILITY{11}
+    QosPolicyId_t DESTINATIONORDER{12}
+    QosPolicyId_t HISTORY{13}
+    QosPolicyId_t RESOURCELIMITS{14}
+    QosPolicyId_t ENTITYFACTORY{15}
+    QosPolicyId_t WRITERDATALIFECYCLE{16}
+    QosPolicyId_t READERDATALIFECYCLE{17}
+    QosPolicyId_t TOPICDATA{18}
+    QosPolicyId_t GROUPDATA{19}
+    QosPolicyId_t TRANSPORTPRIORITY{20}
+    QosPolicyId_t LIFESPAN{21}
+    QosPolicyId_t DURABILITYSERVICE{22}
+
+struct UserDataQosPolicy::
+    value: sequence{octet}
+
+struct TopicDataQosPolicy::
+    value: sequence{octet}
+
+struct GroupDataQosPolicy::
+    value: sequence{octet}
+
+struct TransportPriorityQosPolicy::
+    value: Long
+
+struct LifespanQosPolicy::
+    duration: core/time
+
+enum DurabilityQosPolicyKind::
+  constant Volatile
+  constant TransientLocal
+  constant Transient
+  constant Persistent
+
+struct DurabilityQosPolicy::
+    kind: DurabilityQosPolicyKind
+
+struct PresentationQosPolicy::
+    enum AccessScopeKind::
+        InstanceScope
+        TopicScope
+        GroupScope
+    accessScope: AccessScopeKind
+    coherent_access: Boolean
+    ordered_access: Boolean
+
+struct DeadlineQosPolicy::
+    period: core/time
+
+struct LatencyBudgetQosPolicy::
+    duration: core/time
+
+enum OwnershipQosPolicyKind::
+    Shared
+    Exclusive
+
+struct OwnershipQosPolicy::
+    kind: OwnershipQosPolicyKind
+
+struct OwnershipStrengthQosPolicy::
+    value: Long
+
+enum LivelinessQosPolicyKind::
+    Automatic
+    ManualByParticipant
+    ManualByTopic
+
+struct LivelinessQosPolicy::
+    kind: LivelinessQosPolicyKind
+    lease_duration: core/time
+
+struct TimeBasedFilterQosPolicy::
+    minimum_separation: core/time
+
+// Comma-separated list instead of sequence improves ease-of-use
+text PartitionQosPolicy: width_32
+
+enum ReliabilityQosPolicyKind::
+    BestEffort
+    Reliable
+
+struct ReliabilityQosPolicy::
+    kind: ReliabilityQosPolicyKind
+    max_blocking_time: core/time
+
+enum DestinationOrderQosPolicyKind::
+  constant BY_RECEPTION_TIMESTAMP
+  constant BY_SOURCE_TIMESTAMP
+
+struct DestinationOrderQosPolicy::
+    kind: DestinationOrderQosPolicyKind
+
+enum HistoryQosPolicyKind::
+    KeepLast
+    KeepAll
+
+struct HistoryQosPolicy::
+    kind: HistoryQosPolicyKind
+    depth: Long
+
+struct ResourceLimitsQosPolicy::
+    max_samples: Long
+    max_instances: Long
+    max_samples_per_instance: Long
+
+struct EntityFactoryQosPolicy::
+    autoenable_created_entities: Boolean
+
+struct WriterDataLifecycleQosPolicy::
+    autodispose_unregistered_instances: Boolean
+
+struct ReaderDataLifecycleQosPolicy::
+    autopurge_nowriter_samples_delay: core/time
+    autopurge_disposed_samples_delay: core/time
+
+struct DurabilityServiceQosPolicy::
+    service_cleanup_delay: core/time
+    history_kind: HistoryQosPolicyKind
+    history_depth: Long
+    max_samples: Long
+    max_instances: Long
+    max_samples_per_instance: Long
+
+// ------------------------------------------------------------
+// Entity Qos structures (mapped to classes)
+// ------------------------------------------------------------
+
 // Forward declare entities
+class DomainParticipant
+class Topic
 class Subscriber
 class Publisher
+class DataWriter
+class DataReader
+
+class EntityQos:: // Base-class for entityqos classes
+    void get_default() virtual // Set value to factory-default
+
+class DomainParticipantFactoryQos : EntityQos::
+    entity_factory: EntityFactoryQosPolicy
+    void get_default()
+
+class DomainParticipantQos : EntityQos::
+    user_data: UserDataQosPolicy
+    entity_factory: EntityFactoryQosPolicy
+    void get_default()
+
+class TopicQos : EntityQos::
+    topic_data: TopicDataQosPolicy
+    durability: DurabilityQosPolicy
+    durability_service: DurabilityServiceQosPolicy
+    deadline: DeadlineQosPolicy
+    latency_budget: LatencyBudgetQosPolicy
+    liveliness: LivelinessQosPolicy
+    reliability: ReliabilityQosPolicy
+    destination_order: DestinationOrderQosPolicy
+    history: HistoryQosPolicy
+    resource_limits: ResourceLimitsQosPolicy
+    transport_priority: TransportPriorityQosPolicy
+    lifespan: LifespanQosPolicy
+    ownership: OwnershipQosPolicy
+    int16 init()
+    int16 construct()
+    void get_default()
+
+class DataWriterQos : EntityQos::
+    durability: DurabilityQosPolicy
+    durability_service: DurabilityServiceQosPolicy
+    deadline: DeadlineQosPolicy
+    latency_budget: LatencyBudgetQosPolicy
+    liveliness: LivelinessQosPolicy
+    reliability: ReliabilityQosPolicy
+    destination_order: DestinationOrderQosPolicy
+    history: HistoryQosPolicy
+    resource_limits: ResourceLimitsQosPolicy
+    transport_priority: TransportPriorityQosPolicy
+    lifespan: LifespanQosPolicy
+    user_data: UserDataQosPolicy
+    ownership: OwnershipQosPolicy
+    ownership_strength: OwnershipStrengthQosPolicy
+    writer_data_lifecycle: WriterDataLifecycleQosPolicy
+    int16 init()
+    int16 construct()
+    void get_default()
+    void from_topic(Topic topic)
+
+class PublisherQos : EntityQos::
+    presentation: PresentationQosPolicy
+    partition: PartitionQosPolicy
+    group_data: GroupDataQosPolicy
+    entity_factory: EntityFactoryQosPolicy
+    void get_default()
+
+class SubscriberQos : EntityQos::
+    presentation: PresentationQosPolicy
+    partition: PartitionQosPolicy
+    group_data: GroupDataQosPolicy
+    entity_factory: EntityFactoryQosPolicy
+    void get_default()
+
+class DataReaderQos : EntityQos::
+    durability: DurabilityQosPolicy
+    durability_service: DurabilityServiceQosPolicy
+    deadline: DeadlineQosPolicy
+    latency_budget: LatencyBudgetQosPolicy
+    liveliness: LivelinessQosPolicy
+    reliability: ReliabilityQosPolicy
+    destination_order: DestinationOrderQosPolicy
+    history: HistoryQosPolicy
+    resource_limits: ResourceLimitsQosPolicy
+    transport_priority: TransportPriorityQosPolicy
+    lifespan: LifespanQosPolicy
+    user_data: UserDataQosPolicy
+    ownership: OwnershipQosPolicy
+    time_based_filter: TimeBasedFilterQosPolicy
+    reader_data_lifecycle: ReaderDataLifecycleQosPolicy
+    void get_default()
+    void from_topic(Topic topic)
+
+
+//////////////////////////////////////////////////////////
+// Entities
+//////////////////////////////////////////////////////////
 
 // DomainParticipant
 class DomainParticipant::
     id: int32
     watchForTopics: list{string}, private | local
+    qos: DomainParticipantQos
     void requireTopic(string topic)
     dDDS/Subscriber defaultSubscriber()
     dDDS/Publisher defaultPublisher()
@@ -90,24 +457,26 @@ class DomainParticipant::
 class Topic::
     type: lang/struct // Use lang/struct, so any corto struct can be used
     key: string
+    qos: TopicQos
     int16 construct()
     void destruct()
 
 // Dynamic Publisher
 class Publisher::
-    partitions: dDDS/Sequence{dDDS/String}
+    qos: PublisherQos
     int16 construct()
     void destruct()
 
 // Dynamic Subscriber
 class Subscriber::
-    partitions: dDDS/Sequence{dDDS/String}
+    qos: SubscriberQos
     int16 construct()
     void destruct()
 
 // Dynamic Writer
 class DataWriter::
     member topic: dDDS/Topic
+    qos: DataWriterQos
     member publisher: dDDS/Publisher, private
     int16 construct()
     void destruct()
@@ -150,6 +519,7 @@ class ReadCondition : Condition::
 class DataReader::
     member topic: dDDS/Topic
     member subscriber: dDDS/Publisher, private
+    qos: DataReaderQos
     int16 construct()
     void destruct()
     ReturnCode readAny(dDDS/ObjectSeq& sampleSeq)

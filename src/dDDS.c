@@ -15,6 +15,7 @@ corto_int16 DDDS_ENTITY_HANDLE;
 
 dDDS_Duration dDDS_Duration_Zero = {0, 0};
 dDDS_Duration dDDS_Duration_Infinite = {-1, 0};
+dDDS_Object dDDS_DefaultQos = NULL;
 
 void* _dDDS_getEntity(corto_object o, corto_type type) {
     void* result = NULL;

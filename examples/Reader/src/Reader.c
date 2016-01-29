@@ -28,9 +28,9 @@ int ReaderMain(int argc, char *argv[])
     dDDS_StructDefine(Point);
 
     /* Create DDS entities */
-    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0);
-    dDDS_TopicCreateChild_auto(dp, PointTopic, Point, "");
-    dDDS_DataReaderCreateChild_auto(dp, reader, PointTopic);
+    dDDS_DomainParticipantCreateChild_auto(root_o, dp, 0, dDDS_DefaultQos);
+    dDDS_TopicCreateChild_auto(dp, PointTopic, Point, "", dDDS_DefaultQos);
+    dDDS_DataReaderCreateChild_auto(dp, reader, PointTopic, dDDS_DefaultQos);
     dDDS_ObjectSeqCreate_auto(sampleSeq);
 
     /* Enter main loop */
