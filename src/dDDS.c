@@ -13,6 +13,9 @@
 
 corto_int16 DDDS_ENTITY_HANDLE;
 
+dDDS_Duration dDDS_Duration_Zero = {0, 0};
+dDDS_Duration dDDS_Duration_Infinite = {-1, 0};
+
 void* _dDDS_getEntity(corto_object o, corto_type type) {
     void* result = NULL;
 
@@ -53,6 +56,47 @@ void dDDS_seterr(const char* fmt, ...) {
     va_start(list, fmt);
     corto_seterrv((char*)fmt, list);
     va_end(list);
+}
+
+DDS_SampleStateKind dDDS_toSampleState(dDDS_SampleState s) {
+    DDS_SampleStateKind result = 0;
+
+    if (!s) {
+        result = DDS_ANY_SAMPLE_STATE;
+    } else {
+        if (s & dDDS_Read) result |= DDS_READ_SAMPLE_STATE;
+        if (s & dDDS_NotRead) result |= DDS_NOT_READ_SAMPLE_STATE;
+    }
+
+    return result;
+}
+
+DDS_ViewStateKind dDDS_toViewState(dDDS_ViewState s) {
+    DDS_ViewStateKind result = 0;
+
+    if (!s) {
+        result = DDS_ANY_VIEW_STATE;
+    } else {
+        if (s & dDDS_New) result |= DDS_NEW_VIEW_STATE;
+        if (s & dDDS_NotNew) result |= DDS_NOT_NEW_VIEW_STATE;
+    }
+
+    return result;
+}
+
+DDS_InstanceStateKind dDDS_toInstanceState(dDDS_InstanceState s) {
+    DDS_InstanceStateKind result = 0;
+
+    if (!s) {
+        result = DDS_ANY_INSTANCE_STATE;
+    } else {
+        if (s & dDDS_Alive) result |= DDS_ALIVE_INSTANCE_STATE;
+        if (s & dDDS_NotAlive) result |= DDS_NOT_ALIVE_INSTANCE_STATE;
+        if (s & dDDS_Disposed) result |= DDS_NOT_ALIVE_DISPOSED_INSTANCE_STATE;
+        if (s & dDDS_NoWriters) result |= DDS_NOT_ALIVE_NO_WRITERS_INSTANCE_STATE;
+    }
+
+    return result;
 }
 /* $end */
 

@@ -14,4 +14,8 @@ extern corto_int16 DDDS_ENTITY_HANDLE;
 #define dDDS_getEntity(o, type) _dDDS_getEntity(o, corto_type(type))
 void* _dDDS_getEntity(corto_object o, corto_type type);
 
+DDS_SampleStateKind dDDS_toSampleState(dDDS_SampleState s);
+DDS_ViewStateKind dDDS_toViewState(dDDS_ViewState s);
+DDS_InstanceStateKind dDDS_toInstanceState(dDDS_InstanceState s);
+
 #endif

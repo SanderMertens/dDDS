@@ -35,6 +35,9 @@ DDDS_EXPORT const char* dDDS_lasterr(void);
 /* Hide corto/core/time */
 typedef corto_time dDDS_Time;
 typedef corto_time dDDS_Duration;
+
+DDDS_EXPORT extern dDDS_Duration dDDS_Duration_Zero;
+DDDS_EXPORT extern dDDS_Duration dDDS_Duration_Infinite;
 /* $end */
 
 DDDS_EXPORT corto_void _dDDS_delete(dDDS_Object object);

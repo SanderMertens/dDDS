@@ -11,45 +11,38 @@
 /* $header() */
 #include "dDDS_intern.h"
 
-static DDS_SampleStateKind dDDS_toSampleState(dDDS_SampleState s) {
-    DDS_SampleStateKind result = 0;
+static corto_int16 dDDS_DataReader_copyOut(
+    DDS_DataReader reader,
+    corto_type type,
+    DDS_sequence seqIn,
+    DDS_SampleInfoSeq *infoSeq,
+    dDDS_ObjectSeq *seqOut)
+{
+    DDS_ReturnCode_t status;
 
-    if (!s) {
-        result = DDS_ANY_SAMPLE_STATE;
-    } else {
-        if (s & dDDS_Read) result |= DDS_READ_SAMPLE_STATE;
-        if (s & dDDS_NotRead) result |= DDS_NOT_READ_SAMPLE_STATE;
+    /* Set size of sequence to be big enough for # of returned samples */
+    dDDS_ObjectSeqSize(seqOut, seqIn->_length);
+
+    /* Copy out values */
+    corto_int32 i = 0;
+    void *ptr = seqIn->_buffer;
+    for (i = 0; i < seqIn->_length; i++) {
+        dDDS_Object o = dDDS_Object_new(type, "{}");
+        corto_copyp(o, type, ptr);
+        seqOut->buffer[i] = o;
+        ptr = CORTO_OFFSET(ptr, corto_type(type)->size);
     }
 
-    return result;
-}
-
-static DDS_ViewStateKind dDDS_toViewState(dDDS_ViewState s) {
-    DDS_ViewStateKind result = 0;
-
-    if (!s) {
-        result = DDS_ANY_VIEW_STATE;
-    } else {
-        if (s & dDDS_New) result |= DDS_NEW_VIEW_STATE;
-        if (s & dDDS_NotNew) result |= DDS_NOT_NEW_VIEW_STATE;
+    /* Return loan */
+    status = DDS_DataReader_return_loan(reader, seqIn, infoSeq);
+    if (status != DDS_RETCODE_OK) {
+        corto_seterr("dDDS/DataReader/read: return_loan failed");
+        goto error;
     }
 
-    return result;
-}
-
-static DDS_InstanceStateKind dDDS_toInstanceState(dDDS_InstanceState s) {
-    DDS_InstanceStateKind result = 0;
-
-    if (!s) {
-        result = DDS_ANY_INSTANCE_STATE;
-    } else {
-        if (s & dDDS_Alive) result |= DDS_ALIVE_INSTANCE_STATE;
-        if (s & dDDS_NotAlive) result |= DDS_NOT_ALIVE_INSTANCE_STATE;
-        if (s & dDDS_Disposed) result |= DDS_NOT_ALIVE_DISPOSED_INSTANCE_STATE;
-        if (s & dDDS_NoWriters) result |= DDS_NOT_ALIVE_NO_WRITERS_INSTANCE_STATE;
-    }
-
-    return result;
+    return 0;
+error:
+    return -1;
 }
 
 static corto_int16 dDDS_DataReader_doRead(
@@ -110,23 +103,70 @@ static corto_int16 dDDS_DataReader_doRead(
         goto error;
     }
 
-    /* Set size of sequence to be big enough for # of returned samples */
-    dDDS_ObjectSeqSize(sampleSeq, ddsSeq->_length);
-
-    /* Copy out values */
-    corto_int32 i = 0;
-    void *ptr = ddsSeq->_buffer;
-    for (i = 0; i < ddsSeq->_length; i++) {
-        dDDS_Object o = dDDS_Object_new(this->topic->type, "{}");
-        corto_copyp(o, this->topic->type, ptr);
-        sampleSeq->buffer[i] = o;
-        ptr = CORTO_OFFSET(ptr, corto_type(this->topic->type)->size);
+    if (dDDS_DataReader_copyOut(
+        reader, corto_type(this->topic->type), ddsSeq, infoSeq, sampleSeq))
+    {
+        goto error;
     }
 
-    /* Return loan */
-    status = DDS_DataReader_return_loan(reader, ddsSeq, infoSeq);
-    if (status != DDS_RETCODE_OK) {
-        corto_seterr("dDDS/DataReader/read: return_loan failed");
+    return 0;
+error:
+    return -1;
+}
+
+static corto_int16 dDDS_DataReader_doRead_w_condition(
+    dDDS_DataReader this,
+    dDDS_ObjectSeq *sampleSeq,
+    corto_uint32 length,
+    dDDS_Condition cond,
+    corto_bool take)
+{
+    DDS_ReturnCode_t status;
+    DDS_Condition ddsCond = corto_olsGet(cond, DDDS_ENTITY_HANDLE);
+
+    if (length == -1) {
+        length = DDS_LENGTH_UNLIMITED;
+    }
+
+    DDS_DataReader reader = dDDS_getEntity(this, dDDS_DataReader_o);
+    if (!reader) {
+        corto_seterr("dDDS/DataReader/read: invalid handle");
+        goto error;
+    }
+
+    if (!sampleSeq) {
+        corto_seterr("dDDS/DataReader/read: invalid sample sequence provided");
+        goto error;
+    }
+
+    DDS_sequence ddsSeq = corto_calloc(sizeof(DDS_SampleInfoSeq));
+    ddsSeq->_release = FALSE;
+    DDS_SampleInfoSeq *infoSeq = DDS_SampleInfoSeq__alloc();
+    infoSeq->_release = FALSE;
+
+    if (take) {
+        status = DDS_DataReader_take_w_condition (
+            reader,
+            ddsSeq,
+            infoSeq,
+            length,
+            ddsCond);
+    } else {
+        status = DDS_DataReader_read_w_condition (
+            reader,
+            ddsSeq,
+            infoSeq,
+            length,
+            ddsCond);
+    }
+    if ((status != DDS_RETCODE_OK) && (status != DDS_RETCODE_NO_DATA)) {
+        corto_seterr("dDDS/DataReader/read: read failed (%d)", status);
+        goto error;
+    }
+
+    if (dDDS_DataReader_copyOut(
+        reader, corto_type(this->topic->type), ddsSeq, infoSeq, sampleSeq))
+    {
         goto error;
     }
 
@@ -227,7 +267,7 @@ corto_void _dDDS_DataReader_destruct(dDDS_DataReader this) {
 /* $end */
 }
 
-dDDS_ReturnCode _dDDS_DataReader_read(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, corto_uint32 length, dDDS_SampleState sampleState, dDDS_ViewState viewState, dDDS_InstanceState instanceState) {
+dDDS_ReturnCode _dDDS_DataReader_read(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, dDDS_ULong length, dDDS_SampleState sampleState, dDDS_ViewState viewState, dDDS_InstanceState instanceState) {
 /* $begin(dDDS/DataReader/read) */
 
     return dDDS_DataReader_doRead(
@@ -243,7 +283,16 @@ dDDS_ReturnCode _dDDS_DataReader_readAny(dDDS_DataReader this, dDDS_ObjectSeq *s
 /* $end */
 }
 
-dDDS_ReturnCode _dDDS_DataReader_take(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, corto_uint32 length, dDDS_SampleState sampleState, dDDS_ViewState viewState, dDDS_InstanceState instanceState) {
+dDDS_ReturnCode _dDDS_DataReader_readCondition(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, dDDS_ULong length, dDDS_Condition cond) {
+/* $begin(dDDS/DataReader/readCondition) */
+
+    return dDDS_DataReader_doRead_w_condition(
+      this, sampleSeq, length, cond, FALSE);
+
+/* $end */
+}
+
+dDDS_ReturnCode _dDDS_DataReader_take(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, dDDS_ULong length, dDDS_SampleState sampleState, dDDS_ViewState viewState, dDDS_InstanceState instanceState) {
 /* $begin(dDDS/DataReader/take) */
 
     return dDDS_DataReader_doRead(
@@ -256,5 +305,14 @@ dDDS_ReturnCode _dDDS_DataReader_takeAny(dDDS_DataReader this, dDDS_ObjectSeq *s
 
     return dDDS_DataReader_doRead(
       this, sampleSeq, -1, dDDS_Any, dDDS_Any, dDDS_Any, TRUE);
+/* $end */
+}
+
+dDDS_ReturnCode _dDDS_DataReader_takeCondition(dDDS_DataReader this, dDDS_ObjectSeq *sampleSeq, dDDS_ULong length, dDDS_Condition cond) {
+/* $begin(dDDS/DataReader/takeCondition) */
+
+    return dDDS_DataReader_doRead_w_condition(
+      this, sampleSeq, length, cond, TRUE);
+
 /* $end */
 }

@@ -58,6 +58,9 @@ type Object: lang/typeKind/VOID, true ::
     dDDS/Object new(dDDS/Struct type, string json)
     void set(dDDS/Object sample, string json)
     dDDS/String json(dDDS/Object sample)
+    dDDS/Object parentof(dDDS/Object this)
+    dDDS/String nameof(dDDS/Object this)
+    lang/type typeof(dDDS/Object this)
 
 // Wrappers to hide Corto functions
 void @delete(dDDS/Object object)
@@ -130,29 +133,6 @@ bitmask InstanceState::
     Disposed: 0x4
     NoWriters: 0x8
 
-// Dynamic Reader
-class DataReader::
-    member topic: dDDS/Topic
-    member subscriber: dDDS/Publisher, private
-    int16 construct()
-    void destruct()
-    ReturnCode readAny(dDDS/ObjectSeq& sampleSeq)
-    ReturnCode takeAny(dDDS/ObjectSeq& sampleSeq)
-
-    ReturnCode read(
-        dDDS/ObjectSeq& sampleSeq,
-        uint32 length,
-        SampleState sampleState,
-        ViewState viewState,
-        InstanceState instanceState)
-
-    ReturnCode take(
-        dDDS/ObjectSeq& sampleSeq,
-        uint32 length,
-        SampleState sampleState,
-        ViewState viewState,
-        InstanceState instanceState)
-
 // Generic Condition
 void ConditionAction(Object c) delegate
 class Condition::
@@ -165,6 +145,39 @@ class ReadCondition : Condition::
     member sampleState: dDDS/SampleState
     member viewState: dDDS/ViewState
     member instanceState: dDDS/InstanceState
+
+// Dynamic Reader
+class DataReader::
+    member topic: dDDS/Topic
+    member subscriber: dDDS/Publisher, private
+    int16 construct()
+    void destruct()
+    ReturnCode readAny(dDDS/ObjectSeq& sampleSeq)
+    ReturnCode takeAny(dDDS/ObjectSeq& sampleSeq)
+
+    ReturnCode readCondition(
+        dDDS/ObjectSeq& sampleSeq,
+        ULong length,
+        Condition cond)
+
+    ReturnCode takeCondition(
+        dDDS/ObjectSeq& sampleSeq,
+        ULong length,
+        Condition cond)
+
+    ReturnCode read(
+        dDDS/ObjectSeq& sampleSeq,
+        ULong length,
+        SampleState sampleState,
+        ViewState viewState,
+        InstanceState instanceState)
+
+    ReturnCode take(
+        dDDS/ObjectSeq& sampleSeq,
+        ULong length,
+        SampleState sampleState,
+        ViewState viewState,
+        InstanceState instanceState)
 
 // WaitSet
 class WaitSet::

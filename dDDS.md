@@ -27,7 +27,7 @@ Dynamic DDS API.
 ### construct()
 #### Returns
 ### destruct()
-### read(/dDDS/ObjectSeq& sampleSeq,uint32 length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
+### read(/dDDS/ObjectSeq& sampleSeq,/dDDS/ULong length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
 #### sampleSeq
 #### length
 #### sampleState
@@ -37,8 +37,13 @@ Dynamic DDS API.
 ### readAny(/dDDS/ObjectSeq& sampleSeq)
 #### sampleSeq
 #### Returns
+### readCondition(/dDDS/ObjectSeq& sampleSeq,/dDDS/ULong length,/dDDS/Condition cond)
+#### sampleSeq
+#### length
+#### cond
+#### Returns
 ### subscriber
-### take(/dDDS/ObjectSeq& sampleSeq,uint32 length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
+### take(/dDDS/ObjectSeq& sampleSeq,/dDDS/ULong length,/dDDS/SampleState sampleState,/dDDS/ViewState viewState,/dDDS/InstanceState instanceState)
 #### sampleSeq
 #### length
 #### sampleState
@@ -47,6 +52,11 @@ Dynamic DDS API.
 #### Returns
 ### takeAny(/dDDS/ObjectSeq& sampleSeq)
 #### sampleSeq
+#### Returns
+### takeCondition(/dDDS/ObjectSeq& sampleSeq,/dDDS/ULong length,/dDDS/Condition cond)
+#### sampleSeq
+#### length
+#### cond
 #### Returns
 ### topic
 
@@ -99,13 +109,22 @@ Dynamic DDS API.
 ### json(/dDDS/Object sample)
 #### sample
 #### Returns
+### nameof(/dDDS/Object this)
+#### this
+#### Returns
 ### new(/dDDS/Struct type,string json)
 #### type
 #### json
 #### Returns
+### parentof(/dDDS/Object this)
+#### this
+#### Returns
 ### set(/dDDS/Object sample,string json)
 #### sample
 #### json
+### typeof(/dDDS/Object this)
+#### this
+#### Returns
 
 ## ObjectSeq
 

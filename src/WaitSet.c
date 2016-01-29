@@ -71,10 +71,27 @@ dDDS_ReturnCode _dDDS_WaitSet_dispatch(dDDS_WaitSet this, corto_time *timeout) {
 /* $begin(dDDS/WaitSet/dispatch) */
     DDS_WaitSet ws = corto_olsGet(this, DDDS_ENTITY_HANDLE);
     DDS_ConditionSeq *seq = DDS_ConditionSeq__alloc();
-    DDS_Duration_t t = {timeout->sec, timeout->nanosec};
+    DDS_Duration_t t = DDS_DURATION_INFINITE;
     DDS_ReturnCode_t result;
 
     result = DDS_WaitSet_wait(ws, seq, &t);
+    if (timeout->sec != -1) {
+        t = (DDS_Duration_t){timeout->sec, timeout->nanosec};
+    }
+
+    /* Walk triggered conditions, dispatch corresponding delegates */
+    if (result == dDDS_Ok) {
+        int i;
+        for (i = 0; i < seq->_length; i++) {
+            dDDS_ConditionListForeach(this->conditions, c) {
+                DDS_Condition ddsCond = corto_olsGet(c, DDDS_ENTITY_HANDLE);
+                if (ddsCond == seq->_buffer[i]) {
+                    dDDS_ConditionActionCall(&c->onTrigger, c);
+                    break;
+                }
+            }
+        }
+    }
 
     DDS_free(seq);
 

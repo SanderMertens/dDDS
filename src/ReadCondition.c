@@ -34,9 +34,9 @@ corto_int16 _dDDS_ReadCondition_construct(dDDS_ReadCondition this) {
     /* Create ReadCondition */
     rc = DDS_DataReader_create_readcondition(
         dr,
-        this->sampleState,
-        this->viewState,
-        this->instanceState);
+        dDDS_toSampleState(this->sampleState),
+        dDDS_toViewState(this->viewState),
+        dDDS_toInstanceState(this->instanceState));
     if (!rc) {
         corto_seterr(
           "dDDS/ReadCondition/construct: failed to create readcondition %s",

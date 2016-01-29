@@ -14,9 +14,13 @@
 
 dDDS_String _dDDS_Object_json(dDDS_Object sample) {
 /* $begin(dDDS/Object/json) */
-
     return json_fromCorto(sample);
+/* $end */
+}
 
+dDDS_String _dDDS_Object_nameof(dDDS_Object _this) {
+/* $begin(dDDS/Object/nameof) */
+    return corto_nameof(_this);
 /* $end */
 }
 
@@ -48,6 +52,12 @@ error:
 /* $end */
 }
 
+dDDS_Object _dDDS_Object_parentof(dDDS_Object _this) {
+/* $begin(dDDS/Object/parentof) */
+    return corto_parentof(_this);
+/* $end */
+}
+
 corto_void _dDDS_Object_set(dDDS_Object sample, corto_string json) {
 /* $begin(dDDS/Object/set) */
 
@@ -55,6 +65,14 @@ corto_void _dDDS_Object_set(dDDS_Object sample, corto_string json) {
     if (json_toCorto(sample, json)) {
         corto_error("failed to deserialize json: %s", corto_lasterr());
     }
+
+/* $end */
+}
+
+corto_type _dDDS_Object_typeof(dDDS_Object _this) {
+/* $begin(dDDS/Object/typeof) */
+
+    return corto_typeof(_this);
 
 /* $end */
 }
