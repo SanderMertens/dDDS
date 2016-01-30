@@ -1,7 +1,7 @@
 
 # dDDS (dynamic DDS)
 
-This project is a prototype for a dynamic DDS API which allows for the creation of types at runtime. The API provides
+This project is a prototype for a dynamic DDS API which allows for the creation and discovery of types at runtime. The API provides
 OpenSpliceDDS compatible metadescriptors based on dynamically created types.
 
 The API allows for creating dynamic readers and writers, and send/receive samples over DDS. The API uses JSON to get and set values. Not all DDS features are supported yet. See 'Limitations' for what is not yet possible.
